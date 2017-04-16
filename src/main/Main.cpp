@@ -2,13 +2,36 @@
 
 #include <iostream>
 
+#include <test/Test.hpp>
+#include <core/terms/values/Value.hpp>
+
 int main()
 {
-	Main m;
+	if (!TEST)
+	{
+		Main m;
+	}
+	else
+	{
+		Test t;
+	}
 	return 0;
 }
 
 Main::Main()
 {
-	std::cout << "hello world" << std::endl;
+	init();
+	run();
+}
+
+void Main::run()
+{
+	std::cout << system.getValue() << std::endl;
+}
+
+void Main::init()
+{
+	//Term<double>* term = new Value();
+	//Term<void*>* term2 = static_cast<Term<void*>*>(term);
+	//system.addTerm(term2);
 }
