@@ -2,6 +2,7 @@
 #define __SYSTEM_CLASS__
 
 #include <string>
+#include <stack>
 
 #include <core/terms/Term.hpp>
 
@@ -16,6 +17,7 @@ class System
 		std::string getSystemString() const;
 	private:
 		Term* root;
+		std::stack<Term*> branch;
 };
 
 #endif

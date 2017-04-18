@@ -31,7 +31,6 @@ void Main::run()
 
 void Main::init()
 {
-	//Term* term = new Value();
-	//Term<void*>* term2 = static_cast<Term<void*>*>(term);
-	//system.addTerm(term2);
+	Term* term = new Value();
+	system.addTerm(term);
 }
