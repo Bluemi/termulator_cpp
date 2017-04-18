@@ -1,5 +1,6 @@
 #include "Data.hpp"
 
+#include <iostream>
 #include <string.h>
 #include <stdlib.h>
 #include <bitset>
@@ -19,6 +20,8 @@ Data::Data(T t)
 }
 
 template Data::Data(double t);
+template Data::Data(long int t);
+template Data::Data(bool t);
 
 Data::Data(DataType type)
 {
@@ -56,6 +59,8 @@ T Data::get() const
 }
 
 template double Data::get() const;
+template long int Data::get() const;
+template bool Data::get() const;
 
 template <typename T>
 void Data::set(T t)
@@ -85,4 +90,33 @@ void Data::set(T t)
 			break;
 		}
 	}
+}
+
+template void Data::set(double t);
+template void Data::set(long int t);
+template void Data::set(bool t);
+
+std::string Data::getString() const
+{
+	switch (type_)
+	{
+		case BOOL:
+		{
+			return data_.b?"true":"false";
+		}
+		case DOUBLE:
+		{
+			return std::to_string(data_.d);
+		}
+		case INT:
+		{
+			return std::to_string(data_.i);
+		}
+		default:
+		{
+			return "?";
+		}
+	}
+	std::cout << "Data::getString(): ERROR" << std::endl;
+	return "?";
 }

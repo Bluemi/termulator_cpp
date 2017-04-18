@@ -12,7 +12,7 @@ class System
 		// organisation
 		void addTerm(Term* term);
 		// getter
-		std::string getValue() const;
+		Data getValue() const;
 		std::string getSystemString() const;
 	private:
 		Term* root;

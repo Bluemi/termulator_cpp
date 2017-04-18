@@ -8,6 +8,8 @@ class Addition : public Operation<2>
 	public:
 		Addition();
 		virtual Data getValue() const override;
+	protected:
+		virtual std::string getLinkSign() const override;
 };
 
 #endif

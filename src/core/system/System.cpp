@@ -19,14 +19,12 @@ void System::addTerm(Term* term)
 	}
 }
 
-std::string System::getValue() const
+Data System::getValue() const
 {
-	//return root->getValue();
-	return "";
+	return root->getValue();
 }
 
 std::string System::getSystemString() const
 {
-	return "";
-	//return root->getString();
+	return root->getString();
 }

@@ -21,6 +21,7 @@ class Data
 		T get() const;
 		template <typename T>
 		void set(T t);
+		std::string getString() const;
 	private:
 		Datum data_;
 		DataType type_;

@@ -6,21 +6,21 @@ std::string getTypeName(const DataType t)
 {
 	switch (t)
 	{
-		case DataType::INT:
+		case DataType::BOOL:
 		{
-			return "INT";
+			return "BOOL";
 		}
 		case DataType::DOUBLE:
 		{
 			return "DOUBLE";
 		}
+		case DataType::INT:
+		{
+			return "INT";
+		}
 		case DataType::UNDEFINED:
 		{
 			return "UNDEFINED";
-		}
-		case DataType::BOOL:
-		{
-			return "BOOL";
 		}
 	}
 	std::cout << "Unknown DataType: " << t << std::endl;

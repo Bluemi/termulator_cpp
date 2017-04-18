@@ -11,6 +11,16 @@ Value::Value(const int precision)
 Value::~Value()
 {}
 
+DataType Value::getValueType() const
+{
+	return DataType::DOUBLE;
+}
+
+bool Value::hasValue() const
+{
+	return true;
+}
+
 // Value
 Data Value::getValue() const
 {

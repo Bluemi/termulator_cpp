@@ -26,12 +26,12 @@ Main::Main()
 
 void Main::run()
 {
-	std::cout << system.getValue() << std::endl;
+	std::cout << system.getValue().getString() << std::endl;
 }
 
 void Main::init()
 {
-	//Term<double>* term = new Value();
+	//Term* term = new Value();
 	//Term<void*>* term2 = static_cast<Term<void*>*>(term);
 	//system.addTerm(term2);
 }

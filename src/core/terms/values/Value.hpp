@@ -19,6 +19,9 @@ class Value : public Term
 		Value(int precision = DEFAULT_PRECISION);
 		~Value();
 
+		virtual DataType getValueType() const override;
+		virtual bool hasValue() const override;
+
 		// Approx
 		virtual Data getValue() const override;
 	 	void setValue(const double value);

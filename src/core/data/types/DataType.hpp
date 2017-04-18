@@ -3,7 +3,7 @@
 
 #include <string>
 
-enum DataType : char { UNDEFINED, DOUBLE, INT, BOOL };
+enum DataType : char { UNDEFINED, BOOL, DOUBLE, INT };
 
 std::string getTypeName(DataType);
 
