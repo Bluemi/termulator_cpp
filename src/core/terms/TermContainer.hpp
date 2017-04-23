@@ -3,21 +3,26 @@
 
 #include "Term.hpp"
 
-template <unsigned int NUM_OF_OPERATORS>
 class TermContainer : public Term
 {
 	public:
+		TermContainer(unsigned int size);
+		~TermContainer();
 		bool validIndex(const unsigned int index) const;
 		virtual bool isContainer() const override;
 		virtual bool hasValue() const override;
 		virtual std::string getString() const override;
+		unsigned int getChildSize() const;
+		void addChild(Term* t);
 	protected:
-		TermContainer();
 		Term* getChild(const unsigned int index) const;
 		Term* setChild(const unsigned int index, Term* t); // returns the term hold before at <index>
 		virtual std::string getLinkSign() const = 0;
+		bool isSlotEmpty(const unsigned int i) const;
+		unsigned int getFirstEmptySlot() const;
 	private:
-		Term* terms[NUM_OF_OPERATORS];
+		Term** terms_;
+		unsigned int size_;
 };
 
 #endif

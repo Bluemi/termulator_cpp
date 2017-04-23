@@ -1,43 +1,46 @@
 #include "System.hpp"
 
-#include <iostream>
-
 System::System()
-	: root(nullptr)
+	: TermContainer(NUM_OF_SYSTEM_CHILDS)
 {}
-
-void System::addTerm(Term* term)
-{
-	if (root == nullptr)
-	{
-		root = term;
-		branch.push(term);
-	}
-	else
-	{
-		std::cout << "System::addTerm(): TODO" << std::endl;
-		root->isContainer();
-	}
-}
 
 Data System::getValue() const
 {
-	if (root == nullptr)
+	if (getRoot() == nullptr)
 	{
 		return Data();
 	}
-	if (!root->hasValue())
+	if (!getRoot() ->hasValue())
 	{
 		return Data();
 	}
-	return root->getValue();
+	return getRoot()->getValue();
 }
 
 std::string System::getSystemString() const
 {
-	if (root == nullptr)
+	if (getRoot() == nullptr)
 	{
 		return "";
 	}
-	return root->getString();
+	return getRoot()->getString();
+}
+
+DataType System::getValueType() const
+{
+	if (getRoot() == nullptr)
+	{
+		return DataType::UNDEFINED;
+	}
+	return getRoot()->getValueType();
+}
+
+std::string System::getLinkSign() const
+{
+	return "";
+}
+
+Term* System::getRoot() const
+{
+	return getChild(0);
 }

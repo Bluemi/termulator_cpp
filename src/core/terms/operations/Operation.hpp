@@ -8,11 +8,10 @@
 
 #include <core/terms/TermContainer.hpp>
 
-template <unsigned int NUM_OF_OPERATORS>
-class Operation : public TermContainer<NUM_OF_OPERATORS>
+class Operation : public TermContainer
 {
 	public:
-		Operation();
+		Operation(const unsigned int size);
 		// returns DataType::DOUBLE
 		virtual DataType getValueType() const override;
 		// returns true, if all Childs exist, have Value and this Value has to be of Type DOUBLE

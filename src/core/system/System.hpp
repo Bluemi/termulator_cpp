@@ -5,19 +5,23 @@
 #include <stack>
 
 #include <core/terms/Term.hpp>
+#include <core/terms/TermContainer.hpp>
 
-class System
+constexpr unsigned int NUM_OF_SYSTEM_CHILDS = 1;
+
+class System : public TermContainer
 {
 	public:
 		System();
-		// organisation
-		void addTerm(Term* term);
 		// getter
 		Data getValue() const;
 		std::string getSystemString() const;
+		virtual DataType getValueType() const override;
+	protected:
+		virtual std::string getLinkSign() const override;
 	private:
-		Term* root;
-		std::stack<Term*> branch;
+		Term* getRoot() const;
+		std::stack<Term*> branch_;
 };
 
 #endif

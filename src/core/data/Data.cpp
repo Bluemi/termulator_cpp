@@ -98,6 +98,7 @@ template void Data::set(bool t);
 
 std::string Data::getString() const
 {
+	std::cout << "type_ = " << type_ << std::endl;
 	switch (type_)
 	{
 		case BOOL:

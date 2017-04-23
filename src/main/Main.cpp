@@ -22,15 +22,21 @@ Main::Main()
 {
 	init();
 	run();
+	uninit();
 }
 
 void Main::run()
 {
-	std::cout << system.getValue().getString() << std::endl;
+	std::cout << system_.getValue().getString() << std::endl;
 }
 
 void Main::init()
 {
 	Term* term = new Value();
-	system.addTerm(term);
+	system_.addChild(term);
+}
+
+void Main::uninit()
+{
+	std::cout << "Main::uninit() TODO" << std::endl;
 }

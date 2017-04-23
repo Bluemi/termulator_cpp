@@ -3,7 +3,7 @@
 
 #include "Operation.hpp"
 
-class Addition : public Operation<2>
+class Addition : public Operation
 {
 	public:
 		Addition();

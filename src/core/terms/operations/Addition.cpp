@@ -1,6 +1,7 @@
 #include "Addition.hpp"
 
 Addition::Addition()
+	: Operation(2)
 {}
 
 Data Addition::getValue() const

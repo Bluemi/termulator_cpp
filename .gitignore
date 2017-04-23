@@ -1,5 +1,5 @@
-./log
-./core
+/log
+/core
 
 .bam/
 bam/build/

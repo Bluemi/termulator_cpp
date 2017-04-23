@@ -1,21 +1,33 @@
 #include "TermContainer.hpp"
 
-template <unsigned int NUM_OF_OPERATORS>
-bool TermContainer<NUM_OF_OPERATORS>::validIndex(const unsigned int index) const
+TermContainer::TermContainer(unsigned int size)
+	: size_(size)
 {
-	return (index >= 0) && (index < NUM_OF_OPERATORS);
+	terms_ = (Term**)::operator new(size_*(sizeof(Term**)));
+	for (unsigned int i = 0; i < size_; i++)
+	{
+		terms_[i] = nullptr;
+	}
 }
 
-template <unsigned int NUM_OF_OPERATORS>
-bool TermContainer<NUM_OF_OPERATORS>::isContainer() const
+TermContainer::~TermContainer()
+{
+	::operator delete(terms_);
+}
+
+bool TermContainer::validIndex(const unsigned int index) const
+{
+	return (index >= 0) && (index < size_);
+}
+
+bool TermContainer::isContainer() const
 {
 	return true;
 }
 
-template <unsigned int NUM_OF_OPERATORS>
-bool TermContainer<NUM_OF_OPERATORS>::hasValue() const
+bool TermContainer::hasValue() const
 {
-	for (unsigned int i = 0; i < NUM_OF_OPERATORS; i++)
+	for (unsigned int i = 0; i < size_; i++)
 	{
 		if ((getChild(i) == nullptr) || (!getChild(i)->hasValue()))
 		{
@@ -25,14 +37,13 @@ bool TermContainer<NUM_OF_OPERATORS>::hasValue() const
 	return true;
 }
 
-template <unsigned int NUM_OF_OPERATORS>
-std::string TermContainer<NUM_OF_OPERATORS>::getString() const
+std::string TermContainer::getString() const
 {
 	std::string s = "";
-	for (unsigned int i = 0; i < NUM_OF_OPERATORS; i++)
+	for (unsigned int i = 0; i < size_; i++)
 	{
 		s += getChild(i)->getString();
-		if (i != (NUM_OF_OPERATORS-1))
+		if (i != (size_-1))
 		{
 			s += getLinkSign();
 		}
@@ -40,35 +51,57 @@ std::string TermContainer<NUM_OF_OPERATORS>::getString() const
 	return s;
 }
 
-template <unsigned int NUM_OF_OPERATORS>
-TermContainer<NUM_OF_OPERATORS>::TermContainer()
+unsigned int TermContainer::getChildSize() const
 {
-	for (unsigned int i = 0; i < NUM_OF_OPERATORS; i++)
-	{
-		terms[i] = nullptr;
-	}
+	return size_;
 }
 
-template <unsigned int NUM_OF_OPERATORS>
-Term* TermContainer<NUM_OF_OPERATORS>::getChild(const unsigned int index) const
+Term* TermContainer::getChild(const unsigned int index) const
 {
 	if (validIndex(index))
 	{
-		return terms[index];
+		return terms_[index];
 	}
 	return nullptr;
 }
 
-template <unsigned int NUM_OF_OPERATORS>
-Term* TermContainer<NUM_OF_OPERATORS>::setChild(const unsigned int index, Term* t)
+Term* TermContainer::setChild(const unsigned int index, Term* t)
 {
 	if (validIndex(index))
 	{
-		Term* oldTerm = terms[index];
-		terms[index] = t;
+		Term* oldTerm = terms_[index];
+		terms_[index] = t;
 		return oldTerm;
 	}
 	return nullptr;
 }
 
-template class TermContainer<2>;
+void TermContainer::addChild(Term* t)
+{
+	const unsigned int index = getFirstEmptySlot();
+	if (validIndex(index))
+	{
+		terms_[index] = t;
+	}
+}
+
+bool TermContainer::isSlotEmpty(const unsigned int i) const
+{
+	if (validIndex(i))
+	{
+		return (terms_[i] == nullptr);
+	}
+	return false;
+}
+
+unsigned int TermContainer::getFirstEmptySlot() const
+{
+	for (unsigned int i = 0; i < size_; i++)
+	{
+		if (isSlotEmpty(i))
+		{
+			return i;
+		}
+	}
+	return -1;
+}

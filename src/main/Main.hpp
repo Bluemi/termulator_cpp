@@ -11,8 +11,9 @@ class Main
 		Main();
 	private:
 		void init();
+		void uninit();
 		void run();
-		System system;
+		System system_;
 };
 
 #endif
