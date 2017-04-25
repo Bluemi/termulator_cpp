@@ -9,6 +9,7 @@ class Term
 {
 	public:
 		Term();
+		virtual ~Term();
 		// value
 		virtual Data getValue() const = 0;
 		virtual DataType getValueType() const = 0;

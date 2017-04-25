@@ -22,7 +22,6 @@ Main::Main()
 {
 	init();
 	run();
-	uninit();
 }
 
 void Main::run()
@@ -33,10 +32,8 @@ void Main::run()
 void Main::init()
 {
 	Term* term = new Value();
-	system_.addChild(term);
-}
-
-void Main::uninit()
-{
-	std::cout << "Main::uninit() TODO" << std::endl;
+	if (!system_.addChild(term))
+	{
+		std::cout << "ERROR: Main::init(): system.addChild() failed" << std::endl;
+	}
 }

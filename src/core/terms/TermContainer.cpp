@@ -3,7 +3,7 @@
 TermContainer::TermContainer(unsigned int size)
 	: size_(size)
 {
-	terms_ = (Term**)::operator new(size_*(sizeof(Term**)));
+	terms_ = (Term**) (::operator new(size_*(sizeof(Term**))));
 	for (unsigned int i = 0; i < size_; i++)
 	{
 		terms_[i] = nullptr;
@@ -12,6 +12,14 @@ TermContainer::TermContainer(unsigned int size)
 
 TermContainer::~TermContainer()
 {
+	for (unsigned int i = 0; i < size_; i++)
+	{
+		if (!isSlotEmpty(i))
+		{
+			terms_[i]->hasValue();
+			delete terms_[i];
+		}
+	}
 	::operator delete(terms_);
 }
 
@@ -76,13 +84,15 @@ Term* TermContainer::setChild(const unsigned int index, Term* t)
 	return nullptr;
 }
 
-void TermContainer::addChild(Term* t)
+bool TermContainer::addChild(Term* t)
 {
 	const unsigned int index = getFirstEmptySlot();
 	if (validIndex(index))
 	{
 		terms_[index] = t;
+		return true;
 	}
+	return false;
 }
 
 bool TermContainer::isSlotEmpty(const unsigned int i) const

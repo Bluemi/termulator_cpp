@@ -7,13 +7,13 @@ class TermContainer : public Term
 {
 	public:
 		TermContainer(unsigned int size);
-		~TermContainer();
+		virtual ~TermContainer();
 		bool validIndex(const unsigned int index) const;
 		virtual bool isContainer() const override;
 		virtual bool hasValue() const override;
 		virtual std::string getString() const override;
 		unsigned int getChildSize() const;
-		void addChild(Term* t);
+		bool addChild(Term* t);
 	protected:
 		Term* getChild(const unsigned int index) const;
 		Term* setChild(const unsigned int index, Term* t); // returns the term hold before at <index>

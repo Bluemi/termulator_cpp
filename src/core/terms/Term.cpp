@@ -3,6 +3,9 @@
 Term::Term()
 {}
 
+Term::~Term()
+{}
+
 bool Term::isContainer() const
 {
 	return false;

@@ -4,6 +4,9 @@ System::System()
 	: TermContainer(NUM_OF_SYSTEM_CHILDS)
 {}
 
+System::~System()
+{}
+
 Data System::getValue() const
 {
 	if (getRoot() == nullptr)
@@ -33,6 +36,11 @@ DataType System::getValueType() const
 		return DataType::UNDEFINED;
 	}
 	return getRoot()->getValueType();
+}
+
+bool System::hasRoot() const
+{
+	return (getRoot() != nullptr);
 }
 
 std::string System::getLinkSign() const

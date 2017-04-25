@@ -12,7 +12,7 @@ void testValueSetValue()
 		v.setValue(i);
 		if (v.getValue().get<double>() != i)
 		{
-			std::cout << "Failure when i = " << i << std::endl;
+			std::cout << "testValueSetValue(): Failure when i = " << i << std::endl;
 		}
 	}
 }
@@ -79,5 +79,5 @@ Test::Test()
 	//testValuePlus();
 	//testValueMinus();
 	//testValueMulti();
-	testValueDivision();
+	//testValueDivision();
 }

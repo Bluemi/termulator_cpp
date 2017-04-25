@@ -13,10 +13,12 @@ class System : public TermContainer
 {
 	public:
 		System();
+		~System();
 		// getter
 		Data getValue() const;
 		std::string getSystemString() const;
 		virtual DataType getValueType() const override;
+		bool hasRoot() const;
 	protected:
 		virtual std::string getLinkSign() const override;
 	private:
