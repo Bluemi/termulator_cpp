@@ -18,6 +18,7 @@ class Term
 		virtual std::string getString() const = 0;
 		// container
 		virtual bool isContainer() const;
+		virtual bool isEmptyTerm() const;
 };
 
 #endif

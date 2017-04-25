@@ -1,12 +1,16 @@
 #include "TermContainer.hpp"
 
+#include <iostream>
+
+#include "EmptyTerm.hpp"
+
 TermContainer::TermContainer(unsigned int size)
-	: size_(size)
+	: MISSING_ARGUMENT("_"), size_(size)
 {
 	terms_ = (Term**) (::operator new(size_*(sizeof(Term**))));
 	for (unsigned int i = 0; i < size_; i++)
 	{
-		terms_[i] = nullptr;
+		terms_[i] = new EmptyTerm();
 	}
 }
 
@@ -14,12 +18,8 @@ TermContainer::~TermContainer()
 {
 	for (unsigned int i = 0; i < size_; i++)
 	{
-		if (!isSlotEmpty(i))
-		{
-			terms_[i]->hasValue();
-			delete terms_[i];
-			terms_[i] = nullptr;
-		}
+		delete terms_[i];
+		terms_[i] = nullptr;
 	}
 	::operator delete(terms_);
 }
@@ -38,7 +38,7 @@ bool TermContainer::hasValue() const
 {
 	for (unsigned int i = 0; i < size_; i++)
 	{
-		if ((getChild(i) == nullptr) || (!getChild(i)->hasValue()))
+		if (!getChild(i)->hasValue())
 		{
 			return false;
 		}
@@ -76,6 +76,11 @@ Term* TermContainer::getChild(const unsigned int index) const
 
 Term* TermContainer::setChild(const unsigned int index, Term* t)
 {
+	if (t == nullptr)
+	{
+		std::cout << "ERROR: TermContainer::setChild(): t == nullptr" << std::endl;
+		return nullptr;
+	}
 	if (validIndex(index))
 	{
 		Term* oldTerm = terms_[index];
@@ -87,6 +92,11 @@ Term* TermContainer::setChild(const unsigned int index, Term* t)
 
 bool TermContainer::addChild(Term* t)
 {
+	if (t == nullptr)
+	{
+		std::cout << "ERROR: TermContainer::addChild(): t == nullptr" << std::endl;
+		return false;
+	}
 	const unsigned int index = getFirstEmptySlot();
 	if (validIndex(index))
 	{
@@ -96,11 +106,36 @@ bool TermContainer::addChild(Term* t)
 	return false;
 }
 
+bool TermContainer::replace(Term* victim, Term* replacement)
+{
+	for (unsigned int i = 0; i < size_; i++)
+	{
+		if (terms_[i] == victim)
+		{
+			terms_[i] = replacement;
+			return true;
+		}
+	}
+	return false;
+}
+
+bool TermContainer::isEmpty() const
+{
+	for (unsigned int i = 0; i < size_; i++)
+	{
+		if (!terms_[i]->isEmptyTerm())
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 bool TermContainer::isSlotEmpty(const unsigned int i) const
 {
 	if (validIndex(i))
 	{
-		return (terms_[i] == nullptr);
+		return terms_[i]->isEmptyTerm();
 	}
 	return false;
 }

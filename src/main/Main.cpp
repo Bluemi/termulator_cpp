@@ -4,6 +4,7 @@
 
 #include <test/Test.hpp>
 #include <core/terms/values/Value.hpp>
+#include <core/terms/operations/Addition.hpp>
 
 int main()
 {
@@ -26,12 +27,19 @@ Main::Main()
 
 void Main::run()
 {
-	std::cout << system_.getValue().getString() << std::endl;
+	std::cout << system_.getString() << std::endl;
 }
 
 void Main::init()
 {
-	Term* term = new Value();
+	std::cout << "adding addition" << std::endl;
+	Term* term = new Addition();
+	if (!system_.addChild(term))
+	{
+		std::cout << "ERROR: Main::init(): system.addChild() failed" << std::endl;
+	}
+	std::cout << "adding second addition" << std::endl;
+	term = new Addition();
 	if (!system_.addChild(term))
 	{
 		std::cout << "ERROR: Main::init(): system.addChild() failed" << std::endl;

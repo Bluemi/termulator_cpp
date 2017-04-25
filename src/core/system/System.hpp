@@ -2,12 +2,10 @@
 #define __SYSTEM_CLASS__
 
 #include <string>
-#include <stack>
+#include <vector>
 
 #include <core/terms/Term.hpp>
 #include <core/terms/TermContainer.hpp>
-
-constexpr unsigned int NUM_OF_SYSTEM_CHILDS = 1;
 
 class System : public TermContainer
 {
@@ -17,13 +15,19 @@ class System : public TermContainer
 		// getter
 		Data getValue() const;
 		std::string getSystemString() const;
-		virtual DataType getValueType() const override;
-		bool hasRoot() const;
-	protected:
+		DataType getValueType() const;
+		bool isEmpty() const;
+		Term* getTop() const;
+		TermContainer* getLeafContainer();
+		void addContainer(TermContainer* c);
+		bool addChild(Term* t);
+		std::string getString() const;
 		virtual std::string getLinkSign() const override;
+		virtual bool replace(Term* victim, Term* replacement) override;
 	private:
 		Term* getRoot() const;
-		std::stack<Term*> branch_;
+		void setRoot(Term* t);
+		std::vector<Term*> branch_;
 };
 
 #endif

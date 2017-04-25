@@ -14,6 +14,9 @@ class TermContainer : public Term
 		virtual std::string getString() const override;
 		unsigned int getChildSize() const;
 		bool addChild(Term* t);
+		virtual bool replace(Term* victim, Term* replacement);
+		bool isEmpty() const;
+		const std::string MISSING_ARGUMENT;
 	protected:
 		Term* getChild(const unsigned int index) const;
 		Term* setChild(const unsigned int index, Term* t); // returns the term hold before at <index>

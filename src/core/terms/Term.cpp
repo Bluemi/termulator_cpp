@@ -10,3 +10,8 @@ bool Term::isContainer() const
 {
 	return false;
 }
+
+bool Term::isEmptyTerm() const
+{
+	return false;
+}
