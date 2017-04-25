@@ -18,6 +18,7 @@ TermContainer::~TermContainer()
 		{
 			terms_[i]->hasValue();
 			delete terms_[i];
+			terms_[i] = nullptr;
 		}
 	}
 	::operator delete(terms_);
