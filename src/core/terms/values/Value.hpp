@@ -27,12 +27,13 @@ class Value : public Term
 	 	void setValue(const double value);
 		void setPrecision(const int precision);
 		int getPrecision() const;
+		long int getCoefficient() const;
+		long int getExponent() const;
 
 		std::string getString() const;
 
 		// parse
-		bool parseInt(const std::string& s);
-		bool parseFloat(const std::string& s);
+		bool parse(const std::string& s);
 
 		// operations
 		Value operator+(const Value& value) const;

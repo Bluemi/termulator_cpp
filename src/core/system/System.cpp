@@ -115,6 +115,7 @@ bool System::replace(Term* victim, Term* replacement)
 	if (getRoot() == victim)
 	{
 		setRoot(replacement);
+		branch_[0] = replacement;
 		return true;
 	}
 	return false;

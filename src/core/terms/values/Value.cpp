@@ -1,6 +1,5 @@
 #include "Value.hpp"
 
-
 #include <iostream>
 #include <tgmath.h>
 
@@ -62,22 +61,121 @@ int Value::getPrecision() const
 	return precision_;
 }
 
+long int Value::getCoefficient() const
+{
+	return coefficient_;
+}
+
+long int Value::getExponent() const
+{
+	return exponent_;
+}
+
 std::string Value::getString() const
 {
-	return "";
+	if (coefficient_ == 0)
+	{
+		return "0";
+	}
+	std::string s = std::to_string(coefficient_);
+	if (exponent_ > 0)
+	{
+		for (int i = 0; i < exponent_; i++)
+		{
+			s += "0";
+		}
+	}
+	else if (exponent_ < 0)
+	{
+		if ((int)s.length() <= (-exponent_))
+		{
+			const int slength = s.length();
+			for (unsigned int i = 0; i <= (-exponent_ - slength); i++)
+			{
+				s.insert(0, "0");
+			}
+			s.insert(1, ".");
+		}
+		else
+		{
+			s.insert(s.length() + exponent_, ".");
+		}
+	}
+	return s;
 }
 
-// parse
-bool parseInt(const std::string& s)
+int toDigit(const char c)
 {
-	std::cout << "Value::parseInt(): TODO" << std::endl;
-	return false;
+	switch (c)
+	{
+		case '0':
+			return 0;
+		case '1':
+			return 1;
+		case '2':
+			return 2;
+		case '3':
+			return 3;
+		case '4':
+			return 4;
+		case '5':
+			return 5;
+		case '6':
+			return 6;
+		case '7':
+			return 7;
+		case '8':
+			return 8;
+		case '9':
+			return 9;
+	}
+	return -1;
 }
 
-bool Value::parseFloat(const std::string& s)
+bool isDelimiter(char c)
 {
-	std::cout << "Value::parseInt(): TODO" << std::endl;
-	return false;
+	return ((c == '.') || (c == ','));
+}
+
+bool Value::parse(const std::string& s)
+{
+	int c(0);
+	int e(0);
+	bool delimiterFound = false;
+	for (unsigned int i = 0; i < s.length(); i++)
+	{
+		if (delimiterFound)
+		{
+			e++;
+		}
+		const int digit = toDigit(s[i]);
+		if (digit == -1)
+		{
+			if (isDelimiter(s[i]))
+			{
+				if (delimiterFound)
+				{
+					return false;
+				}
+				else
+				{
+					delimiterFound = true;
+				}
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			c *= 10;
+			c += digit;
+		}
+	}
+	exponent_ = -e;
+	coefficient_ = c;
+	return true;
 }
 
 // operations
