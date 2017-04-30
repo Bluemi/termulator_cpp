@@ -1,41 +1,41 @@
-#include "Value.hpp"
+#include "Number.hpp"
 
 #include <iostream>
 #include <tgmath.h>
 
-Value::Value(const int precision)
+Number::Number(const int precision)
 	: coefficient_(0), exponent_(0), precision_(precision)
 {}
 
-Value::~Value()
+Number::~Number()
 {}
 
-DataType Value::getValueType() const
+DataType Number::getValueType() const
 {
 	return DataType::DOUBLE;
 }
 
-bool Value::hasValue() const
+bool Number::hasValue() const
 {
 	return true;
 }
 
-// Value
-Data Value::getValue() const
+//Number 
+Data Number::getValue() const
 {
 	return Data(coefficient_ * pow(10.0, exponent_));
 }
 
-void Value::setValue(const double value)
+void Number::setValue(const double number)
 {
-	if (value == 0.0)
+	if (number == 0.0)
 	{
 		coefficient_ = 0;
 		exponent_ = 0;
 		return;
 	}
 	// coefficient = 2.2 * 10^5 = 220000
-	long int coefficient = (int)(value * pow(10.0, precision_));
+	long int coefficient = (int)(number * pow(10.0, precision_));
 	// exponent = -5
 	long int exponent = -precision_;
 	int i = 0;
@@ -48,7 +48,7 @@ void Value::setValue(const double value)
 	coefficient_ = coefficient;
 }
 
-void Value::setPrecision(const int precision)
+void Number::setPrecision(const int precision)
 {
 	if (precision >= 0)
 	{
@@ -56,22 +56,22 @@ void Value::setPrecision(const int precision)
 	}
 }
 
-int Value::getPrecision() const
+int Number::getPrecision() const
 {
 	return precision_;
 }
 
-long int Value::getCoefficient() const
+long int Number::getCoefficient() const
 {
 	return coefficient_;
 }
 
-long int Value::getExponent() const
+long int Number::getExponent() const
 {
 	return exponent_;
 }
 
-std::string Value::getString() const
+std::string Number::getString() const
 {
 	if (coefficient_ == 0)
 	{
@@ -137,7 +137,7 @@ bool isDelimiter(char c)
 	return ((c == '.') || (c == ','));
 }
 
-bool Value::parse(const std::string& s)
+bool Number::parse(const std::string& s)
 {
 	int c(0);
 	int e(0);
@@ -179,75 +179,75 @@ bool Value::parse(const std::string& s)
 }
 
 // operations
-Value Value::operator+(const Value& value) const
+Number Number::operator+(const Number& number) const
 {
-	Value result;
-	if (this->exponent_ > value.coefficient_)
+	Number result;
+	if (this->exponent_ > number.coefficient_)
 	{
-		const long int aValue = this->coefficient_ * pow(10.0, this->exponent_ - value.exponent_);
-		result.exponent_ = value.exponent_;
-		result.coefficient_ = aValue + value.coefficient_;
+		const long int aNumber = this->coefficient_ * pow(10.0, this->exponent_ - number.exponent_);
+		result.exponent_ = number.exponent_;
+		result.coefficient_ = aNumber + number.coefficient_;
 	}
-	else if (this->exponent_ < value.exponent_)
+	else if (this->exponent_ < number.exponent_)
 	{
-		const long int aValue = value.coefficient_ * pow(10.0, value.exponent_ - this->exponent_);
+		const long int aNumber = number.coefficient_ * pow(10.0, number.exponent_ - this->exponent_);
 		result.exponent_ = this->exponent_;
-		result.coefficient_ = aValue + this->coefficient_;
+		result.coefficient_ = aNumber + this->coefficient_;
 	}
 	else
 	{
 		result.exponent_ = this->exponent_;
-		result.coefficient_ = this->coefficient_ + value.coefficient_;
+		result.coefficient_ = this->coefficient_ + number.coefficient_;
 	}
 
 	return result;
 }
 
-Value Value::operator-(const Value& value) const
+Number Number::operator-(const Number& number) const
 {
-	Value result;
-	if (this->exponent_ > value.coefficient_)
+	Number result;
+	if (this->exponent_ > number.coefficient_)
 	{
-		const long int aValue = this->coefficient_ * pow(10.0, this->exponent_ - value.exponent_);
-		result.exponent_ = value.exponent_;
-		result.coefficient_ = aValue - value.coefficient_;
+		const long int aNumber = this->coefficient_ * pow(10.0, this->exponent_ - number.exponent_);
+		result.exponent_ = number.exponent_;
+		result.coefficient_ = aNumber - number.coefficient_;
 	}
-	else if (this->exponent_ < value.exponent_)
+	else if (this->exponent_ < number.exponent_)
 	{
-		const long int aValue = value.coefficient_ * pow(10.0, value.exponent_ - this->exponent_);
+		const long int aNumber = number.coefficient_ * pow(10.0, number.exponent_ - this->exponent_);
 		result.exponent_ = this->exponent_;
-		result.coefficient_ = aValue - this->coefficient_;
+		result.coefficient_ = aNumber - this->coefficient_;
 	}
 	else
 	{
 		result.exponent_ = this->exponent_;
-		result.coefficient_ = this->coefficient_ - value.coefficient_;
+		result.coefficient_ = this->coefficient_ - number.coefficient_;
 	}
 
 	return result;
 }
 
-Value Value::operator*(const Value& value) const
+Number Number::operator*(const Number& number) const
 {
-	Value result;
-	result.exponent_ = this->exponent_ + value.exponent_;
-	result.coefficient_ = this->coefficient_ * value.coefficient_;
+	Number result;
+	result.exponent_ = this->exponent_ + number.exponent_;
+	result.coefficient_ = this->coefficient_ * number.coefficient_;
 	return result;
 }
 
-Value Value::operator/(const Value& value) const
+Number Number::operator/(const Number& number) const
 {
-	if (value.coefficient_ == 0)
+	if (number.coefficient_ == 0)
 	{
-		return Value();
+		return Number();
 	}
-	Value result;
-	result.setValue(this->getValue().get<double>() / value.getValue().get<double>());
+	Number result;
+	result.setValue(this->getValue().get<double>() / number.getValue().get<double>());
 	return result;
 }
 
-bool Value::operator==(const Value& value) const
+bool Number::operator==(const Number& number) const
 {
-	std::cout << "Value::operator==(): TODO" << std::endl;
+	std::cout << "Number::operator==(): TODO" << std::endl;
 	return false;
 }

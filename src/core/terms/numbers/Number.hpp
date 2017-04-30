@@ -1,5 +1,5 @@
-#ifndef __VALUE_CLASS__
-#define __VALUE_CLASS__
+#ifndef __NUMBER_CLASS__
+#define __NUMBER_CLASS__
 
 /*
 	represents a human writable number like 0.5 or 0.123, if behavior is equal to "FLOAT_BEHAVIOR" or represents ints, if behavior is set to "INT_BEHAVIOR".
@@ -13,11 +13,11 @@
 
 constexpr int DEFAULT_PRECISION = 5;
 
-class Value : public Term
+class Number : public Term
 {
 	public:
-		Value(int precision = DEFAULT_PRECISION);
-		~Value();
+		Number(int precision = DEFAULT_PRECISION);
+		~Number();
 
 		virtual DataType getValueType() const override;
 		virtual bool hasValue() const override;
@@ -36,11 +36,11 @@ class Value : public Term
 		bool parse(const std::string& s);
 
 		// operations
-		Value operator+(const Value& value) const;
-		Value operator-(const Value& value) const;
-		Value operator*(const Value& value) const;
-		Value operator/(const Value& value) const;
-		bool operator==(const Value& value) const;
+		Number operator+(const Number& value) const;
+		Number operator-(const Number& value) const;
+		Number operator*(const Number& value) const;
+		Number operator/(const Number& value) const;
+		bool operator==(const Number& value) const;
 	private:
 		long int coefficient_;
 		long int exponent_;

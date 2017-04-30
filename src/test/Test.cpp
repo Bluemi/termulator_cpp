@@ -2,86 +2,86 @@
 
 #include <iostream>
 
-#include <core/terms/values/Value.hpp>
+#include <core/terms/numbers/Number.hpp>
 
-void testValueSetValue()
+void testNumberSetValue()
 {
-	Value v;
+	Number v;
 	/*
 	for (double i = -100; i < 200; i += 2)
 	{
 		v.setValue(i);
 		if (v.getValue().get<double>() != i)
 		{
-			std::cout << "testValueSetValue(): Failure when i = " << i << std::endl;
+			std::cout << "testNumberSetValue(): Failure when i = " << i << std::endl;
 		}
 	}
 	*/
 	v.setValue(10.2);
-	std::cout << "testValueSetValue(): 10.2 = " << v.getString() << std::endl;
+	std::cout << "testNumberSetValue(): 10.2 = " << v.getString() << std::endl;
 }
 
-void testValuePlus()
+void testNumberPlus()
 {
 	double a = -100.0;
-	Value aValue;
-	Value bValue;
+	Number aNumber;
+	Number bNumber;
 	for (double b = -10.0; b < 20.0; b++)
 	{
-		aValue.setValue(a);
-		bValue.setValue(b);
-		std::cout << a << " + " << b << " = " << (aValue + bValue).getValue().get<double>() << std::endl;
+		aNumber.setValue(a);
+		bNumber.setValue(b);
+		std::cout << a << " + " << b << " = " << (aNumber + bNumber).getValue().get<double>() << std::endl;
 		a += 9;
 	}
 }
 
-void testValueMinus()
+void testNumberMinus()
 {
 	double a = -100.0;
-	Value aValue;
-	Value bValue;
+	Number aNumber;
+	Number bNumber;
 	for (double b = -10.0; b < 20.0; b++)
 	{
-		aValue.setValue(a);
-		bValue.setValue(b);
-		std::cout << a << " - " << b << " = " << (aValue - bValue).getValue().get<double>() << std::endl;
+		aNumber.setValue(a);
+		bNumber.setValue(b);
+		std::cout << a << " - " << b << " = " << (aNumber - bNumber).getValue().get<double>() << std::endl;
 		a += 9;
 	}
 }
 
-void testValueMulti()
+void testNumberMulti()
 {
 	double a = -100.0;
-	Value aValue;
-	Value bValue;
+	Number aNumber;
+	Number bNumber;
 	for (double b = -10.0; b < 20.0; b++)
 	{
-		aValue.setValue(a);
-		bValue.setValue(b);
-		std::cout << a << " * " << b << " = " << (aValue * bValue).getValue().get<double>() << std::endl;
+		aNumber.setValue(a);
+		bNumber.setValue(b);
+		std::cout << a << " * " << b << " = " << (aNumber * bNumber).getValue().get<double>() << std::endl;
 		a += 9;
 	}
 }
 
-void testValueDivision()
+void testNumberDivision()
 {
 	double a = -100.0;
-	Value aValue;
-	Value bValue;
+	Number aNumber;
+	Number bNumber;
 	for (double b = -10.0; b < 20.0; b++)
 	{
-		aValue.setValue(a);
-		bValue.setValue(b);
-		std::cout << a << " / " << b << " = " << (aValue / bValue).getValue().get<double>() << std::endl;
+		aNumber.setValue(a);
+		bNumber.setValue(b);
+		std::cout << a << " / " << b << " = " << (aNumber / bNumber).getValue().get<double>() << std::endl;
 		a += 9;
 	}
 }
 
 #include <vector>
 
-void testValueParse()
+void testNumberParse()
 {
-	Value v;
+	Number v;
 	std::vector<std::string> str{"1234", "0000.000004567", "0,0023", "543.1234"};
 	for (unsigned int i = 0; i < str.size(); i++)
 	{
@@ -92,10 +92,10 @@ void testValueParse()
 
 Test::Test()
 {
-	//testValueSetValue();
-	//testValuePlus();
-	//testValueMinus();
-	//testValueMulti();
-	//testValueDivision();
-	testValueParse();
+	//testNumberSetValue();
+	//testNumberPlus();
+	//testNumberMinus();
+	//testNumberMulti();
+	//testNumberDivision();
+	testNumberParse();
 }

@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include <test/Test.hpp>
-#include <core/terms/values/Value.hpp>
+#include <core/terms/numbers/Number.hpp>
 #include <core/terms/operations/Addition.hpp>
 
 int main()
@@ -28,8 +28,8 @@ Main::Main()
 void Main::run()
 {
 	std::cout << "Term: " << system_.getString() << std::endl;
-	std::cout << "adding Value" << std::endl;
-	Value* value = new Value();
+	std::cout << "adding Number" << std::endl;
+	Number* value = new Number();
 	value->parse("10.2");
 	if (!system_.addChild(value))
 	{
