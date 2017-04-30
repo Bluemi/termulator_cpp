@@ -7,7 +7,7 @@ class Addition : public Operation
 {
 	public:
 		Addition();
-		virtual Data getValue() const override;
+		virtual Value getValue() const override;
 	protected:
 		virtual std::string getLinkSign() const override;
 };

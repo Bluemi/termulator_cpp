@@ -19,11 +19,11 @@ class Number : public Term
 		Number(int precision = DEFAULT_PRECISION);
 		~Number();
 
-		virtual DataType getValueType() const override;
+		virtual ValueType getValueType() const override;
 		virtual bool hasValue() const override;
 
 		// Approx
-		virtual Data getValue() const override;
+		virtual Value getValue() const override;
 	 	void setValue(const double value);
 		void setPrecision(const int precision);
 		int getPrecision() const;

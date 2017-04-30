@@ -1,7 +1,7 @@
-#ifndef __DATA_CLASS__
-#define __DATA_CLASS__
+#ifndef __VALUE_CLASS__
+#define __VALUE_CLASS__
 
-#include <core/data/types/DataType.hpp>
+#include <core/values/types/ValueType.hpp>
 
 union Datum
 {
@@ -10,21 +10,21 @@ union Datum
 	bool b;
 };
 
-class Data
+class Value
 {
 	public:
-		Data();
+		Value();
 		template<typename T>
-		Data(T t);
-		Data(DataType type);
+		Value(T t);
+		Value(ValueType type);
 		template<typename T>
 		T get() const;
 		template <typename T>
 		void set(T t);
 		std::string getString() const;
 	private:
-		Datum data_;
-		DataType type_;
+		Datum value_;
+		ValueType type_;
 };
 
 #endif

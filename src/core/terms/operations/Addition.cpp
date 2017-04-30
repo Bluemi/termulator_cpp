@@ -4,13 +4,13 @@ Addition::Addition()
 	: Operation(2)
 {}
 
-Data Addition::getValue() const
+Value Addition::getValue() const
 {
 	if (!hasValue())
 	{
-		return Data();
+		return Value();
 	}
-	return Data(getChild(0)->getValue().get<double>() + getChild(1)->getValue().get<double>());
+	return Value(getChild(0)->getValue().get<double>() + getChild(1)->getValue().get<double>());
 }
 
 std::string Addition::getLinkSign() const

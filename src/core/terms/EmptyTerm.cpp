@@ -6,14 +6,14 @@ EmptyTerm::EmptyTerm()
 EmptyTerm::~EmptyTerm()
 {}
 
-Data EmptyTerm::getValue() const
+Value EmptyTerm::getValue() const
 {
-	return Data();
+	return Value();
 }
 
-DataType EmptyTerm::getValueType() const
+ValueType EmptyTerm::getValueType() const
 {
-	return DataType::UNDEFINED;
+	return ValueType::UNDEFINED;
 }
 
 bool EmptyTerm::hasValue() const

@@ -10,9 +10,9 @@ Number::Number(const int precision)
 Number::~Number()
 {}
 
-DataType Number::getValueType() const
+ValueType Number::getValueType() const
 {
-	return DataType::DOUBLE;
+	return ValueType::DOUBLE;
 }
 
 bool Number::hasValue() const
@@ -21,9 +21,9 @@ bool Number::hasValue() const
 }
 
 //Number 
-Data Number::getValue() const
+Value Number::getValue() const
 {
-	return Data(coefficient_ * pow(10.0, exponent_));
+	return Value(coefficient_ * pow(10.0, exponent_));
 }
 
 void Number::setValue(const double number)

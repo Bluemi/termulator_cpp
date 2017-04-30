@@ -18,7 +18,7 @@ System::~System()
 	}
 }
 
-Data System::getValue() const
+Value System::getValue() const
 {
 	return getRoot()->getValue();
 }
@@ -28,7 +28,7 @@ std::string System::getSystemString() const
 	return getRoot()->getString();
 }
 
-DataType System::getValueType() const
+ValueType System::getValueType() const
 {
 	return getRoot()->getValueType();
 }

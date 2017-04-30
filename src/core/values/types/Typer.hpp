@@ -1,37 +1,37 @@
 #ifndef __TYPER_CLASS__
 #define __TYPER_CLASS__
 
-#include "DataType.hpp"
+#include "ValueType.hpp"
 #include "TypeMatcher.hpp"
 
 template<typename T>
 class Typer
 {
 	public:
-		static DataType toDataType();
-		static bool matches(const DataType& t);
+		static ValueType toValueType();
+		static bool matches(const ValueType& t);
 };
 
 template<typename T>
-DataType Typer<T>::toDataType()
+ValueType Typer<T>::toValueType()
 {
-	if (Typer<T>::matches(DataType::INT))
+	if (Typer<T>::matches(ValueType::INT))
 	{
-		return DataType::INT;
+		return ValueType::INT;
 	}
-	else if (Typer<T>::matches(DataType::DOUBLE))
+	else if (Typer<T>::matches(ValueType::DOUBLE))
 	{
-		return DataType::DOUBLE;
+		return ValueType::DOUBLE;
 	}
-	else if (Typer<T>::matches(DataType::BOOL))
+	else if (Typer<T>::matches(ValueType::BOOL))
 	{
-		return DataType::DOUBLE;
+		return ValueType::DOUBLE;
 	}
-	return DataType::UNDEFINED;
+	return ValueType::UNDEFINED;
 }
 
 template <typename T>
-bool Typer<T>::matches(const DataType& t)
+bool Typer<T>::matches(const ValueType& t)
 {
 	switch (t)
 	{

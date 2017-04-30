@@ -8,8 +8,8 @@ class EmptyTerm : public Term
 	public:
 		EmptyTerm();
 		virtual ~EmptyTerm();
-		virtual Data getValue() const override;
-		virtual DataType getValueType() const override;
+		virtual Value getValue() const override;
+		virtual ValueType getValueType() const override;
 		virtual bool hasValue() const override;
 		virtual std::string getString() const override;
 		virtual bool isEmptyTerm() const override;

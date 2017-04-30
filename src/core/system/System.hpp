@@ -13,9 +13,9 @@ class System : public TermContainer
 		System();
 		~System();
 		// getter
-		Data getValue() const;
+		Value getValue() const;
 		std::string getSystemString() const;
-		DataType getValueType() const;
+		ValueType getValueType() const;
 		bool isEmpty() const;
 		Term* getTop() const;
 		TermContainer* getLeafContainer();

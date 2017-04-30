@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include <core/data/Data.hpp>
+#include <core/values/Value.hpp>
 
 class Term
 {
@@ -11,8 +11,8 @@ class Term
 		Term();
 		virtual ~Term();
 		// value
-		virtual Data getValue() const = 0;
-		virtual DataType getValueType() const = 0;
+		virtual Value getValue() const = 0;
+		virtual ValueType getValueType() const = 0;
 		virtual bool hasValue() const = 0;
 		// string
 		virtual std::string getString() const = 0;

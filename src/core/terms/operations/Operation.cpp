@@ -4,9 +4,9 @@ Operation::Operation(const unsigned int size)
 	: TermContainer(size)
 {}
 
-DataType Operation::getValueType() const
+ValueType Operation::getValueType() const
 {
-	return DataType::DOUBLE;
+	return ValueType::DOUBLE;
 }
 
 bool Operation::hasValue() const
@@ -17,7 +17,7 @@ bool Operation::hasValue() const
 	}
 	for (unsigned int i = 0; i < getChildSize(); i++)
 	{
-		if (TermContainer::getChild(i)->getValueType() != DataType::DOUBLE)
+		if (TermContainer::getChild(i)->getValueType() != ValueType::DOUBLE)
 		{
 			return false;
 		}
