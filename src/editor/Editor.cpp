@@ -5,7 +5,7 @@
 #include <editor/controller/Controller.hpp>
 #include <editor/controller/DefaultController.hpp>
 
-//#include <core/misc/Debug.hpp>
+#include <core/misc/Debug.hpp>
 
 Editor::Editor()
 	: controller_(nullptr), running_(true), state_(CONSOLE), console_(1)
@@ -48,14 +48,16 @@ void Editor::exit()
 
 void Editor::render()
 {
-	//Debug::debug << "hal";
+	Debug::out << "Editor::render()" << Debug::endl;
 	clear();
+	Debug::out << "refresh()" << Debug::endl;
 	refresh();
 	console_.render();
 }
 
 void Editor::applyChar(const int c)
 {
+	Debug::out << "keystroke: \"" << c << "\"" << Debug::endl;
 	keystrokes.push_back(c);
 	if (c == TERMINATE_CHAR)
 	{

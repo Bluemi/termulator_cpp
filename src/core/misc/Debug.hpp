@@ -1,8 +1,6 @@
 #ifndef __DEBUG_CLASS__
 #define __DEBUG_CLASS__
 
-/*
-
 #include <vector>
 #include <string>
 
@@ -18,27 +16,24 @@
 #define FPURPLE "\u001B[35m"
 #define FCYAN "\u001B[36m"
 
-class Debug
+namespace Debug
 {
-	public:
-		enum Tag { endl, error, note };
+	enum Tag { endl, error, note };
+	class DebugClass
+	{
+		public:
+			DebugClass();
+			~DebugClass();
 
-		static Debug debug;
+			DebugClass& operator<<(int i);
+			DebugClass& operator<<(float f);
+			DebugClass& operator<<(std::string s);
+			DebugClass& operator<<(const Debug::Tag tag);
+		private:
+			std::vector<std::string> strings_;
+	};
+	static DebugClass out;
+}
 
-		Debug();
-		~Debug();
-
-		Debug& operator<<(int i);
-		Debug& operator<<(float f);
-		Debug& operator<<(std::string s);
-		Debug& operator<<(const Debug::Tag tag);
-	private:
-
-		static Debug instance;
-		std::vector<std::string> strings_;
-};
-
-Debug Debug::debug;
-*/
 
 #endif

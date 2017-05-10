@@ -1,5 +1,7 @@
 #include "Panel.hpp"
 
+#include <core/misc/Debug.hpp>
+
 Panel::Panel(const int y, const int x, const int height, const int width, RenderMode mode)
 	: mode_(mode)
 {
@@ -13,6 +15,7 @@ Panel::~Panel()
 
 void Panel::refresh()
 {
+	Debug::out << "Panel::refresh()" << Debug::endl;
 	wrefresh(window_);
 }
 

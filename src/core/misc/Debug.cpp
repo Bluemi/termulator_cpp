@@ -1,15 +1,13 @@
 #include "Debug.hpp"
 
-/*
-
 #include <iostream>
 
-Debug::Debug()
+Debug::DebugClass::DebugClass()
 {
 	strings_.push_back("");
 }
 
-Debug::~Debug()
+Debug::DebugClass::~DebugClass()
 {
 	for (auto iter = strings_.begin(); iter != strings_.end(); ++iter)
 	{
@@ -17,25 +15,25 @@ Debug::~Debug()
 	}
 }
 
-Debug& Debug::operator<<(const int i)
+Debug::DebugClass& Debug::DebugClass::operator<<(const int i)
 {
 	strings_.back().append(std::to_string(i));
 	return *this;
 }
 
-Debug& Debug::operator<<(const float f)
+Debug::DebugClass& Debug::DebugClass::operator<<(const float f)
 {
 	strings_.back().append(std::to_string(f));
 	return *this;
 }
 
-Debug& Debug::operator<<(const std::string s)
+Debug::DebugClass& Debug::DebugClass::operator<<(const std::string s)
 {
 	strings_.back().append(s);
 	return *this;
 }
 
-Debug& Debug::operator<<(const Debug::Tag tag)
+Debug::DebugClass& Debug::DebugClass::operator<<(const Debug::Tag tag)
 {
 	switch (tag)
 	{
@@ -57,4 +55,3 @@ Debug& Debug::operator<<(const Debug::Tag tag)
 	}
 	return *this;
 }
-*/
