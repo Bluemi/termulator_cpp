@@ -4,29 +4,33 @@
 #include <curses.h>
 
 #include <core/system/System.hpp>
+#include <editor/console/Console.hpp>
+
+class Controller;
 
 class Editor
 {
-	enum InputState { CONSOLE };
+	enum InputState { CONSOLE, SYSTEMS };
 	public:
+		static const char TERMINATE_CHAR = 27;
 		Editor();
 		~Editor();
 		void run();
 		void exit();
 	private:
-		void render() const;
-		void renderConsole() const;
-		void applyChar(const char c);
+		void render();
+		void applyChar(const int c);
+		void applyConsoleCommand();
 
+		Controller* controller_;
 		System system_;
 		bool running_;
 		InputState state_;
+		Console console_;
 		int nrows_, ncols_;
-		int cursorx_, cursory_;
 		WINDOW* window_;
-		std::string consoleText;
 
-		char tmp_;
+		std::vector<char> keystrokes;
 };
 
 #endif

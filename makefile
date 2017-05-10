@@ -1,6 +1,6 @@
 start: compile run
 run:
-	@./bam/build/debug/termulator | tee log
+	@./bam/build/debug/termulator
 getlog:
 	@if [ -f log ]; then cat log; else echo "no log file"; fi
 gdb:

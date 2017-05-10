@@ -24,6 +24,9 @@ class System : public TermContainer
 		std::string getString() const;
 		virtual std::string getLinkSign() const override;
 		virtual bool replace(Term* victim, Term* replacement) override;
+
+		void selectUp();
+		void selectDown();
 	private:
 		Term* getRoot() const;
 		void setRoot(Term* t);

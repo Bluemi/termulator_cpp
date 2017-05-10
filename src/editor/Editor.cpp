@@ -2,20 +2,34 @@
 
 #include <iostream>
 
+#include <editor/controller/Controller.hpp>
+#include <editor/controller/DefaultController.hpp>
+
+//#include <core/misc/Debug.hpp>
+
 Editor::Editor()
-	: running_(true), state_(CONSOLE), cursorx_(0), cursory_(0)
+	: controller_(nullptr), running_(true), state_(CONSOLE), console_(1)
 {
 	window_ = initscr();
-	//cbreak();
+	controller_ = new DefaultController();
+	raw();
 	noecho();
+	keypad(stdscr, true);
 	clear();
 	getmaxyx(window_, nrows_, ncols_);
+	render();
 }
 
 Editor::~Editor()
 {
 	endwin();
-	std::cout << "c = " << (int)tmp_ << " | " << tmp_ << std::endl;
+	if (controller_ != nullptr)
+		delete controller_;
+	std::cout << "keystrokes:" << std::endl;
+	for (char c : keystrokes)
+	{
+		std::cout << "\t" << (int)c << " : " << c << std::endl;
+	}
 }
 
 void Editor::run()
@@ -32,55 +46,32 @@ void Editor::exit()
 	running_ = false;
 }
 
-void Editor::render() const
+void Editor::render()
 {
+	//Debug::debug << "hal";
 	clear();
-	renderConsole();
-	move(cursory_, cursorx_);
 	refresh();
+	console_.render();
 }
 
-void Editor::renderConsole() const
+void Editor::applyChar(const int c)
 {
-	move(nrows_-1, 0);
-	for (auto iter = consoleText.begin(); iter != consoleText.end(); ++iter)
+	keystrokes.push_back(c);
+	if (c == TERMINATE_CHAR)
 	{
-		addch(*iter);
+		exit();
+		return;
 	}
-}
-
-bool drawableSign(const char c)
-{
-	if ((c >= 32) && (c <= 126))
-	{
-		return true;
-	}
-	return false;
-}
-
-void Editor::applyChar(const char c)
-{
-	if (c != 27)
-		tmp_ = c;
 	switch (state_)
 	{
 		case CONSOLE:
 		{
-			if (c == 27)
-			{
-				running_ = false;
-				return;
-			}
-			if (drawableSign(c))
-			{
-				consoleText.push_back(c);
-				return;
-			}
-			if (c == 127)
-			{
-				if (consoleText.size() > 0)
-					consoleText.pop_back();
-			}
+			console_.applyChar(c);
+			return;
+		}
+		case SYSTEMS:
+		{
+			controller_->applyKeyPress(c);
 		}
 	}
 }

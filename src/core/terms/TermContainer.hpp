@@ -17,8 +17,8 @@ class TermContainer : public Term
 		virtual bool replace(Term* victim, Term* replacement);
 		bool isEmpty() const;
 		const std::string MISSING_ARGUMENT;
-	protected:
 		Term* getChild(const unsigned int index) const;
+	protected:
 		Term* setChild(const unsigned int index, Term* t); // returns the term hold before at <index>
 		virtual std::string getLinkSign() const = 0;
 		bool isSlotEmpty(const unsigned int i) const;

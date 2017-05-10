@@ -121,6 +121,21 @@ bool System::replace(Term* victim, Term* replacement)
 	return false;
 }
 
+void System::selectUp()
+{
+	if (!branch_.empty())
+		branch_.pop_back();
+}
+
+void System::selectDown()
+{
+	if (branch_.back()->isContainer())
+	{
+		TermContainer* t = dynamic_cast<TermContainer*>(branch_.back());
+		branch_.push_back(t->getChild(0));
+	}
+}
+
 Term* System::getRoot() const
 {
 	return getChild(0);
