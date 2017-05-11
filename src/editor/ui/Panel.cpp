@@ -1,7 +1,5 @@
 #include "Panel.hpp"
 
-#include <core/misc/Debug.hpp>
-
 Panel::Panel(const int y, const int x, const int height, const int width, RenderMode mode)
 	: mode_(mode)
 {
@@ -15,7 +13,6 @@ Panel::~Panel()
 
 void Panel::refresh()
 {
-	Debug::out << "Panel::refresh()" << Debug::endl;
 	wrefresh(window_);
 }
 
@@ -26,9 +23,12 @@ WINDOW* Panel::getWindow() const
 
 void Panel::render()
 {
+	wclear(window_);
 	wmove(window_, 0, 0);
 	if (mode_ == RenderMode::BORDER)
-		wborder(window_, '|', '|', '-', '-', '+', '+', '+', '+');
+	{
+		box(window_, 0, 0);
+	}
 }
 
 void Panel::setRenderMode(RenderMode mode)

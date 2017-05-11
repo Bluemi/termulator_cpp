@@ -10,13 +10,7 @@
 Editor::Editor()
 	: controller_(nullptr), running_(true), state_(CONSOLE), console_(1)
 {
-	window_ = initscr();
 	controller_ = new DefaultController();
-	raw();
-	noecho();
-	keypad(stdscr, true);
-	clear();
-	getmaxyx(window_, nrows_, ncols_);
 	render();
 }
 
@@ -25,11 +19,6 @@ Editor::~Editor()
 	endwin();
 	if (controller_ != nullptr)
 		delete controller_;
-	std::cout << "keystrokes:" << std::endl;
-	for (char c : keystrokes)
-	{
-		std::cout << "\t" << (int)c << " : " << c << std::endl;
-	}
 }
 
 void Editor::run()
@@ -48,17 +37,15 @@ void Editor::exit()
 
 void Editor::render()
 {
-	Debug::out << "Editor::render()" << Debug::endl;
 	clear();
-	Debug::out << "refresh()" << Debug::endl;
 	refresh();
 	console_.render();
+	refresh();
 }
 
 void Editor::applyChar(const int c)
 {
-	Debug::out << "keystroke: \"" << c << "\"" << Debug::endl;
-	keystrokes.push_back(c);
+	Debug::out << "Editor::keystroke: \"" << c << "\"" << Debug::endl;
 	if (c == TERMINATE_CHAR)
 	{
 		exit();

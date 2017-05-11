@@ -27,10 +27,6 @@ class Editor
 		bool running_;
 		InputState state_;
 		Console console_;
-		int nrows_, ncols_;
-		WINDOW* window_;
-
-		std::vector<char> keystrokes;
 };
 
 #endif

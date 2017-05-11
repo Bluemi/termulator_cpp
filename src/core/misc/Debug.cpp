@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+Debug::DebugClass Debug::out;
+
 Debug::DebugClass::DebugClass()
 {
 	strings_.push_back("");

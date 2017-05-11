@@ -1,9 +1,7 @@
 #include "Console.hpp"
 
-#include <core/misc/Debug.hpp>
-
 Console::Console(int y)
-	: Panel(3, 3, 5, 5, Panel::RenderMode::CLEAR)
+	: Panel(3, 3, 5, 5, Panel::RenderMode::BORDER)
 {}
 
 bool drawableSign(const char c)
@@ -63,9 +61,7 @@ bool Console::hasMessage() const
 
 void Console::render()
 {
-	Debug::out << "Console::render()" << Debug::endl;
 	Panel::render();
-	Debug::out << "Console::addch" << Debug::endl;
 	for (auto iter = text_.begin(); iter != text_.end(); ++iter)
 		waddch(getWindow(), *iter);
 	Panel::refresh();

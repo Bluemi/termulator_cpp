@@ -32,8 +32,7 @@ namespace Debug
 		private:
 			std::vector<std::string> strings_;
 	};
-	static DebugClass out;
+	extern DebugClass out;
 }
-
 
 #endif
