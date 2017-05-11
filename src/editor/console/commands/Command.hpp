@@ -2,6 +2,9 @@
 #define __COMMAND_CLASS__
 
 #include <string>
+#include <vector>
+
+#include <editor/messages/Message.hpp>
 
 class Command
 {
@@ -9,7 +12,12 @@ class Command
 		Command();
 		virtual ~Command();
 		virtual std::string getName() const = 0;
+		virtual void onAction() = 0;
+		Message* pollMessage();
+	protected:
+		void addMessage(Message*);
 	private:
+		std::vector<Message*> messages_;
 };
 
 #endif

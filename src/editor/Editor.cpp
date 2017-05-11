@@ -8,7 +8,7 @@
 #include <core/misc/Debug.hpp>
 
 Editor::Editor()
-	: controller_(nullptr), running_(true), state_(CONSOLE), console_(1)
+	: controller_(nullptr), running_(true), state_(CONSOLE), console_(LINES-1)
 {
 	controller_ = new DefaultController();
 	render();

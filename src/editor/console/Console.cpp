@@ -1,7 +1,7 @@
 #include "Console.hpp"
 
 Console::Console(int y)
-	: Panel(3, 3, 5, 5, Panel::RenderMode::BORDER)
+	: Panel(y, 0, 1, COLS, Panel::RenderMode::CLEAR)
 {}
 
 bool drawableSign(const char c)
@@ -34,7 +34,13 @@ void Console::applyChar(const char c)
 
 void Console::applyCommand()
 {
-	//size_t occurrence = text.find
+	for (Command* c : commands_)
+	{
+		if (text_.find(c->getName()) == 0)
+		{
+			c->onAction();
+		}
+	}
 	text_.clear();
 }
 

@@ -6,6 +6,7 @@
 
 #include <editor/ui/Panel.hpp>
 #include <editor/messages/Message.hpp>
+#include <editor/console/commands/Command.hpp>
 
 class Console : public Panel
 {
@@ -23,6 +24,7 @@ class Console : public Panel
 	private:
 		std::string text_;
 		std::vector<Message*> messages;
+		std::vector<Command*> commands_;
 };
 
 #endif
