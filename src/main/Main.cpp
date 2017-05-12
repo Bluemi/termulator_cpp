@@ -41,7 +41,7 @@ void Main::run()
 	noecho();
 	keypad(stdscr, true);
 	clear();
-	ESCDELAY = 10;
+	//ESCDELAY = 10;
 	editor_ = new Editor();
 	editor_->run();
 }

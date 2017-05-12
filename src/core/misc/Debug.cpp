@@ -54,6 +54,11 @@ Debug::DebugClass& Debug::DebugClass::operator<<(const Debug::Tag tag)
 			strings_.back().append(NOTE_COLOR).append("NOTE : ").append(DEFAULT_COLOR);
 			break;
 		}
+		case Debug::Tag::test:
+		{
+			strings_.back().append(TEST_COLOR).append("TEST : ").append(DEFAULT_COLOR);
+			break;
+		}
 	}
 	return *this;
 }

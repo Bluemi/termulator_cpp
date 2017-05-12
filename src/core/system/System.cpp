@@ -129,6 +129,10 @@ void System::selectUp()
 
 void System::selectDown()
 {
+	if (branch_.empty())
+	{
+		branch_.push_back(getRoot());
+	}
 	if (branch_.back()->isContainer())
 	{
 		TermContainer* t = dynamic_cast<TermContainer*>(branch_.back());

@@ -6,6 +6,7 @@
 
 #define NOTE_COLOR FYELLOW
 #define ERROR_COLOR FRED
+#define TEST_COLOR FPURPLE
 #define DEFAULT_COLOR "\u001B[0m"
 
 #define FBLACK "\u001B[30m"
@@ -18,7 +19,7 @@
 
 namespace Debug
 {
-	enum Tag { endl, error, note };
+	enum Tag { endl, error, note, test };
 	class DebugClass
 	{
 		public:
