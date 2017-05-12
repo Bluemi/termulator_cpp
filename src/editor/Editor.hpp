@@ -6,9 +6,11 @@
 #include <core/system/System.hpp>
 #include <editor/console/Console.hpp>
 
+#include <editor/messages/MessageListener.hpp>
+
 class Controller;
 
-class Editor
+class Editor : public MessageListener
 {
 	enum InputState { CONSOLE, SYSTEMS };
 	public:
@@ -17,6 +19,9 @@ class Editor
 		~Editor();
 		void run();
 		void exit();
+
+		// messageListener-Functions
+		virtual void applyQuitMessage(const QuitMessage& m) override;
 	private:
 		void render();
 		void applyChar(const int c);

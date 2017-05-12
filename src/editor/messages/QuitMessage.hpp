@@ -8,6 +8,7 @@ class QuitMessage : public Message
 	public:
 		QuitMessage();
 		virtual ~QuitMessage();
+		virtual void dispatch(Editor* e) override;
 };
 
 #endif

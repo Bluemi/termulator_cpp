@@ -19,6 +19,11 @@ Message* Command::pollMessage()
 	return m;
 }
 
+bool Command::hasMessage() const
+{
+	return !messages_.empty();
+}
+
 void Command::addMessage(Message* m)
 {
 	if (m == nullptr)

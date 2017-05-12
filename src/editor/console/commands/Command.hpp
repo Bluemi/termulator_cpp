@@ -14,6 +14,7 @@ class Command
 		virtual std::string getName() const = 0;
 		virtual void onAction() = 0;
 		Message* pollMessage();
+		bool hasMessage() const;
 	protected:
 		void addMessage(Message*);
 	private:

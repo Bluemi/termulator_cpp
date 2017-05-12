@@ -12,8 +12,8 @@ class Console : public Panel
 {
 	public:
 		Console(int y);
+		~Console();
 		void applyChar(const char c);
-		void applyCommand();
 		std::string getText() const;
 		Message* pollMessage();
 		bool hasMessage() const;
@@ -22,8 +22,11 @@ class Console : public Panel
 
 		static const char BACKSPACE = 7;
 	private:
+		void invokeCommand(Command* c);
+		void applyCommand();
+
 		std::string text_;
-		std::vector<Message*> messages;
+		std::vector<Message*> messages_;
 		std::vector<Command*> commands_;
 };
 

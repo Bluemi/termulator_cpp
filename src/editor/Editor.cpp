@@ -35,6 +35,11 @@ void Editor::exit()
 	running_ = false;
 }
 
+void Editor::applyQuitMessage(const QuitMessage& m)
+{
+	exit();
+}
+
 void Editor::render()
 {
 	clear();
@@ -46,16 +51,17 @@ void Editor::render()
 void Editor::applyChar(const int c)
 {
 	Debug::out << "Editor::keystroke: \"" << c << "\"" << Debug::endl;
-	if (c == TERMINATE_CHAR)
-	{
-		exit();
-		return;
-	}
 	switch (state_)
 	{
 		case CONSOLE:
 		{
 			console_.applyChar(c);
+			while (console_.hasMessage())
+			{
+				Message* m = console_.pollMessage();
+				m->dispatch(this);
+				delete m;
+			}
 			return;
 		}
 		case SYSTEMS:

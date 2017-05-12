@@ -1,8 +1,25 @@
 #include "Console.hpp"
 
+#include <editor/console/commands/QuitCommand.hpp>
+
 Console::Console(int y)
 	: Panel(y, 0, 1, COLS, Panel::RenderMode::CLEAR)
-{}
+{
+	// Commands
+	commands_.push_back(new QuitCommand());
+}
+
+Console::~Console()
+{
+	for (Command* c : commands_)
+	{
+		delete c;
+	}
+	for (Message* m : messages_)
+	{
+		delete m;
+	}
+}
 
 bool drawableSign(const char c)
 {
@@ -32,18 +49,6 @@ void Console::applyChar(const char c)
 	}
 }
 
-void Console::applyCommand()
-{
-	for (Command* c : commands_)
-	{
-		if (text_.find(c->getName()) == 0)
-		{
-			c->onAction();
-		}
-	}
-	text_.clear();
-}
-
 std::string Console::getText() const
 {
 	return text_;
@@ -53,8 +58,8 @@ Message* Console::pollMessage()
 {
 	if (hasMessage())
 	{
-		Message* tmp = messages.back();
-		messages.pop_back();
+		Message* tmp = messages_.back();
+		messages_.pop_back();
 		return tmp;
 	}
 	return nullptr;
@@ -62,7 +67,7 @@ Message* Console::pollMessage()
 
 bool Console::hasMessage() const
 {
-	return !messages.empty();
+	return !messages_.empty();
 }
 
 void Console::render()
@@ -71,4 +76,26 @@ void Console::render()
 	for (auto iter = text_.begin(); iter != text_.end(); ++iter)
 		waddch(getWindow(), *iter);
 	Panel::refresh();
+}
+
+void Console::invokeCommand(Command* c)
+{
+	c->onAction();
+	while (c->hasMessage())
+	{
+		messages_.push_back(c->pollMessage());
+	}
+}
+
+void Console::applyCommand()
+{
+	for (Command* c : commands_)
+	{
+		if (text_.find(c->getName()) == 0)
+		{
+			invokeCommand(c);
+			return;
+		}
+	}
+	text_.clear();
 }
