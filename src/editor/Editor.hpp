@@ -14,7 +14,8 @@ class Editor : public MessageListener
 {
 	enum InputState { CONSOLE, SYSTEMS };
 	public:
-		static const char TERMINATE_CHAR = 27;
+		static const char SYSTEM_CHAR = 27;
+		static const char CONSOLE_CHAR = ':';
 		Editor();
 		~Editor();
 		void run();
@@ -23,6 +24,7 @@ class Editor : public MessageListener
 		// messageListener-Functions
 		virtual void applyQuitMessage(const QuitMessage& m) override;
 	private:
+		void renderSystems();
 		void render();
 		void applyChar(const int c);
 		void applyConsoleCommand();

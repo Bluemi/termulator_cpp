@@ -3,6 +3,7 @@
 #include <core/system/System.hpp>
 
 Controller::Controller()
+	: target_(nullptr)
 {
 }
 
@@ -12,10 +13,12 @@ Controller::~Controller()
 
 void Controller::setTarget(System* target)
 {
-	if (target != nullptr)
-	{
-		target_ = target;
-	}
+	target_ = target;
+}
+
+bool Controller::hasTarget() const
+{
+	return (target_ != nullptr);
 }
 
 System* Controller::getTarget() const

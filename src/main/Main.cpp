@@ -35,12 +35,13 @@ Main::~Main()
 
 void Main::run()
 {
+	// initiate ncurses
 	initscr();
-	Debug::out << "initscr" << Debug::endl;
 	raw();
 	noecho();
 	keypad(stdscr, true);
 	clear();
+	ESCDELAY = 10;
 	editor_ = new Editor();
 	editor_->run();
 }

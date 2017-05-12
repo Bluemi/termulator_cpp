@@ -11,6 +11,7 @@ Editor::Editor()
 	: controller_(nullptr), running_(true), state_(CONSOLE), console_(LINES-1)
 {
 	controller_ = new DefaultController();
+	controller_->setTarget(&system_);
 	render();
 }
 
@@ -40,17 +41,38 @@ void Editor::applyQuitMessage(const QuitMessage& m)
 	exit();
 }
 
+void Editor::renderSystems()
+{
+	mvaddstr(2,2, system_.getSystemString().c_str());
+}
+
 void Editor::render()
 {
 	clear();
 	refresh();
+	renderSystems();
 	console_.render();
 	refresh();
 }
 
 void Editor::applyChar(const int c)
 {
-	Debug::out << "Editor::keystroke: \"" << c << "\"" << Debug::endl;
+	if (c == SYSTEM_CHAR)
+	{
+		if (state_ == CONSOLE)
+		{
+			state_ = SYSTEMS;
+			return;
+		}
+	}
+	if (c == CONSOLE_CHAR)
+	{
+		if (state_ == SYSTEMS)
+		{
+			state_ = CONSOLE;
+			return;
+		}
+	}
 	switch (state_)
 	{
 		case CONSOLE:

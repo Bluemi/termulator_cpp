@@ -15,13 +15,19 @@ void DefaultController::applyKeyPress(const char c)
 		case 'j':
 		case 'J':
 		{
-			getTarget()->selectDown();
+			if (hasTarget())
+			{
+				getTarget()->selectDown();
+			}
 			break;
 		}
 		case 'k':
 		case 'K':
 		{
-			getTarget()->selectUp();
+			if (hasTarget())
+			{
+				getTarget()->selectUp();
+			}
 			break;
 		}
 	}

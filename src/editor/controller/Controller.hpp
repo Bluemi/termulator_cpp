@@ -10,6 +10,7 @@ class Controller
 		virtual ~Controller();
 		void setTarget(System* target);
 		virtual void applyKeyPress(const char c) = 0;
+		bool hasTarget() const;
 	protected:
 		System* getTarget() const;
 	private:
