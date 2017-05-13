@@ -49,6 +49,11 @@ Debug::DebugClass& Debug::DebugClass::operator<<(const Debug::Tag tag)
 			strings_.back().append(ERROR_COLOR).append("ERROR: ").append(DEFAULT_COLOR);
 			break;
 		}
+		case Debug::Tag::warn:
+		{
+			strings_.back().append(WARN_COLOR).append("WARN : ").append(DEFAULT_COLOR);
+			break;
+		}
 		case Debug::Tag::note:
 		{
 			strings_.back().append(NOTE_COLOR).append("NOTE : ").append(DEFAULT_COLOR);

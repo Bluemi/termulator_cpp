@@ -1,7 +1,6 @@
 #ifndef __SYSTEM_CLASS__
 #define __SYSTEM_CLASS__
 
-#include <string>
 #include <vector>
 
 #include <core/terms/Term.hpp>
@@ -14,14 +13,13 @@ class System : public TermContainer
 		~System();
 		// getter
 		Value getValue() const;
-		std::string getSystemString() const;
+		virtual std::string getString() const override;
 		ValueType getValueType() const;
 		bool isEmpty() const;
 		Term* getTop() const;
 		TermContainer* getLeafContainer();
 		void addContainer(TermContainer* c);
 		bool addChild(Term* t);
-		std::string getString() const;
 		virtual std::string getLinkSign() const override;
 		virtual bool replace(Term* victim, Term* replacement) override;
 

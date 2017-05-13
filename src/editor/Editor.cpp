@@ -43,7 +43,7 @@ void Editor::applyQuitMessage(const QuitMessage& m)
 
 void Editor::renderSystems()
 {
-	mvaddstr(2,2, system_.getSystemString().c_str());
+	mvaddstr(2,2, system_.getString().c_str());
 }
 
 void Editor::render()

@@ -23,7 +23,7 @@ Value System::getValue() const
 	return getRoot()->getValue();
 }
 
-std::string System::getSystemString() const
+std::string System::getString() const
 {
 	return getRoot()->getString();
 }
@@ -98,11 +98,6 @@ bool System::addChild(Term* t)
 		delete t;
 		return false;
 	}
-}
-
-std::string System::getString() const
-{
-	return getRoot()->getString();
 }
 
 std::string System::getLinkSign() const

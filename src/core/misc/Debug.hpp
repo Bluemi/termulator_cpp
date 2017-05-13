@@ -4,8 +4,9 @@
 #include <vector>
 #include <string>
 
-#define NOTE_COLOR FYELLOW
+#define NOTE_COLOR FBLUE
 #define ERROR_COLOR FRED
+#define WARN_COLOR FYELLOW
 #define TEST_COLOR FPURPLE
 #define DEFAULT_COLOR "\u001B[0m"
 
@@ -19,7 +20,7 @@
 
 namespace Debug
 {
-	enum Tag { endl, error, note, test };
+	enum Tag { endl, error, warn, note, test };
 	class DebugClass
 	{
 		public:

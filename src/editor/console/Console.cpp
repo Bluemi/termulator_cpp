@@ -73,8 +73,7 @@ bool Console::hasMessage() const
 void Console::render()
 {
 	Panel::render();
-	for (auto iter = text_.begin(); iter != text_.end(); ++iter)
-		waddch(getWindow(), *iter);
+	waddstr(getWindow(), text_.c_str());
 	Panel::refresh();
 }
 

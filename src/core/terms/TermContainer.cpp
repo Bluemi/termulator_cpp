@@ -48,7 +48,7 @@ bool TermContainer::hasValue() const
 
 std::string TermContainer::getString() const
 {
-	std::string s = "";
+	std::string s = "(";
 	for (unsigned int i = 0; i < size_; i++)
 	{
 		s += getChild(i)->getString();
@@ -57,7 +57,7 @@ std::string TermContainer::getString() const
 			s += getLinkSign();
 		}
 	}
-	return s;
+	return s+")";
 }
 
 unsigned int TermContainer::getChildSize() const

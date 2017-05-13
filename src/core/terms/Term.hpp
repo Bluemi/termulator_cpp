@@ -4,8 +4,9 @@
 #include <string>
 
 #include <core/values/Value.hpp>
+#include <core/interfaces/Stringable.hpp>
 
-class Term
+class Term : public Stringable
 {
 	public:
 		Term();
@@ -14,8 +15,6 @@ class Term
 		virtual Value getValue() const = 0;
 		virtual ValueType getValueType() const = 0;
 		virtual bool hasValue() const = 0;
-		// string
-		virtual std::string getString() const = 0;
 		// container
 		virtual bool isContainer() const;
 		virtual bool isEmptyTerm() const;
