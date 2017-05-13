@@ -39,6 +39,7 @@ void Main::run()
 	raw();
 	noecho();
 	keypad(stdscr, true);
+	curs_set(0);
 	clear();
 	//ESCDELAY = 10;
 	editor_ = new Editor();
