@@ -1,7 +1,5 @@
 #include "Editor.hpp"
 
-#include <iostream>
-
 #include <editor/controller/Controller.hpp>
 #include <editor/controller/DefaultController.hpp>
 
@@ -55,8 +53,11 @@ void Editor::render()
 	refresh();
 }
 
-void Editor::applyChar(const int c)
+void Editor::applyChar(const char c)
 {
+	{
+		Debug::out << "c = " << c << Debug::endl;
+	}
 	if (c == SYSTEM_CHAR)
 	{
 		if (state_ == CONSOLE)

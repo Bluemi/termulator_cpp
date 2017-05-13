@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <fstream>
 
 #define NOTE_COLOR FBLUE
 #define ERROR_COLOR FRED
@@ -31,8 +32,14 @@ namespace Debug
 			DebugClass& operator<<(float f);
 			DebugClass& operator<<(std::string s);
 			DebugClass& operator<<(const Debug::Tag tag);
+
+			const char* LOG_FILE_NAME = "debug.log";
 		private:
+			void appendColor(std::string c);
+			void appendString(std::string s);
+
 			std::vector<std::string> strings_;
+			std::ofstream fileWriter;
 	};
 	extern DebugClass out;
 }

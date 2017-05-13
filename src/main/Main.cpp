@@ -1,6 +1,5 @@
 #include "Main.hpp"
 
-#include <iostream>
 #include <ncurses.h>
 
 #include <test/Test.hpp>

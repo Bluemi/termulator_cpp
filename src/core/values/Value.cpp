@@ -1,11 +1,11 @@
 #include "Value.hpp"
 
-#include <iostream>
 #include <string.h>
 #include <stdlib.h>
 #include <bitset>
 
 #include <core/values/types/Typer.hpp>
+#include <core/misc/Debug.hpp>
 
 Value::Value()
 {
@@ -117,6 +117,6 @@ std::string Value::getString() const
 			return "?";
 		}
 	}
-	std::cout << "Value::getString(): ERROR" << std::endl;
+	Debug::out << Debug::error << "Value::getString():" << Debug::endl;
 	return "?";
 }

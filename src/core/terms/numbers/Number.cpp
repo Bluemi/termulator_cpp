@@ -1,7 +1,8 @@
 #include "Number.hpp"
 
-#include <iostream>
 #include <tgmath.h>
+
+#include <core/misc/Debug.hpp>
 
 Number::Number(const int precision)
 	: coefficient_(0), exponent_(0), precision_(precision)
@@ -248,6 +249,6 @@ Number Number::operator/(const Number& number) const
 
 bool Number::operator==(const Number& number) const
 {
-	std::cout << "Number::operator==(): TODO" << std::endl;
+	Debug::out << "Number::operator==(): TODO" << Debug::endl;
 	return false;
 }

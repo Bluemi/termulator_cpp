@@ -26,7 +26,7 @@ class Editor : public MessageListener
 	private:
 		void renderSystems();
 		void render();
-		void applyChar(const int c);
+		void applyChar(const char c);
 		void applyConsoleCommand();
 
 		Controller* controller_;

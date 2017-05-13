@@ -1,6 +1,6 @@
 #include "ValueType.hpp"
 
-#include <iostream>
+#include <core/misc/Debug.hpp>
 
 std::string getTypeName(const ValueType t)
 {
@@ -23,7 +23,7 @@ std::string getTypeName(const ValueType t)
 			return "UNDEFINED";
 		}
 	}
-	std::cout << "Unknown ValueType: " << t << std::endl;
+	Debug::out << Debug::warn << "Unknown ValueType: " << t << Debug::endl;
 	return "";
 }
 

@@ -1,8 +1,7 @@
 #include "TermContainer.hpp"
 
-#include <iostream>
-
 #include "EmptyTerm.hpp"
+#include <core/misc/Debug.hpp>
 
 TermContainer::TermContainer(unsigned int size)
 	: MISSING_ARGUMENT("_"), size_(size)
@@ -78,7 +77,7 @@ Term* TermContainer::setChild(const unsigned int index, Term* t)
 {
 	if (t == nullptr)
 	{
-		std::cout << "ERROR: TermContainer::setChild(): t == nullptr" << std::endl;
+		Debug::out << Debug::error << "TermContainer::setChild(): t == nullptr" << Debug::endl;
 		return nullptr;
 	}
 	if (validIndex(index))
@@ -94,7 +93,7 @@ bool TermContainer::addChild(Term* t)
 {
 	if (t == nullptr)
 	{
-		std::cout << "ERROR: TermContainer::addChild(): t == nullptr" << std::endl;
+		Debug::out << Debug::error << "TermContainer::addChild(): t == nullptr" << Debug::endl;
 		return false;
 	}
 	const unsigned int index = getFirstEmptySlot();

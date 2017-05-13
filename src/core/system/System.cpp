@@ -1,8 +1,7 @@
 #include "System.hpp"
 
-#include <iostream>
-
 #include <core/terms/EmptyTerm.hpp>
+#include <core/misc/Debug.hpp>
 
 System::System()
 	: TermContainer(1)
@@ -54,11 +53,11 @@ TermContainer* System::getLeafContainer()
 
 void System::addContainer(TermContainer* c)
 {
-	Term* oldTop = branch_[branch_.size()-1];
+	Term* oldTop = branch_.back();
 	TermContainer* oldTopContainer = getLeafContainer();
 	if (!oldTopContainer->replace(oldTop, c))
 	{
-		std::cout << "ERROR: System::addContainer(): couldn't replace oldTop with c" << std::endl;
+		Debug::out << "ERROR: System::addContainer(): couldn't replace oldTop with c" << Debug::endl;
 	}
 	if (!c->addChild(oldTop))
 	{
@@ -94,7 +93,7 @@ bool System::addChild(Term* t)
 	}
 	else
 	{
-		std::cout << "ERROR: System::addChild(): couldn't replace oldTop with t" << std::endl;
+		Debug::out << Debug::error << "System::addChild(): couldn't replace oldTop with t" << Debug::endl;
 		delete t;
 		return false;
 	}

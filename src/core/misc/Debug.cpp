@@ -7,6 +7,7 @@ Debug::DebugClass Debug::out;
 Debug::DebugClass::DebugClass()
 {
 	strings_.push_back("");
+	fileWriter.open(LOG_FILE_NAME, std::ios::out | std::ios::trunc);
 }
 
 Debug::DebugClass::~DebugClass()
@@ -15,23 +16,24 @@ Debug::DebugClass::~DebugClass()
 	{
 		std::cout << *iter << std::endl;
 	}
+	fileWriter.close();
 }
 
 Debug::DebugClass& Debug::DebugClass::operator<<(const int i)
 {
-	strings_.back().append(std::to_string(i));
+	appendString(std::to_string(i));
 	return *this;
 }
 
 Debug::DebugClass& Debug::DebugClass::operator<<(const float f)
 {
-	strings_.back().append(std::to_string(f));
+	appendString(std::to_string(f));
 	return *this;
 }
 
 Debug::DebugClass& Debug::DebugClass::operator<<(const std::string s)
 {
-	strings_.back().append(s);
+	appendString(s);
 	return *this;
 }
 
@@ -41,29 +43,46 @@ Debug::DebugClass& Debug::DebugClass::operator<<(const Debug::Tag tag)
 	{
 		case Debug::Tag::endl:
 		{
+			appendColor(DEFAULT_COLOR);
 			strings_.push_back("");
+			fileWriter << std::endl;
 			break;
 		}
 		case Debug::Tag::error:
 		{
-			strings_.back().append(ERROR_COLOR).append("ERROR: ").append(DEFAULT_COLOR);
+			appendColor(ERROR_COLOR);
+			appendString("ERROR: ");
 			break;
 		}
 		case Debug::Tag::warn:
 		{
-			strings_.back().append(WARN_COLOR).append("WARN : ").append(DEFAULT_COLOR);
+			appendColor(WARN_COLOR);
+			appendString("WARN : ");
 			break;
 		}
 		case Debug::Tag::note:
 		{
-			strings_.back().append(NOTE_COLOR).append("NOTE : ").append(DEFAULT_COLOR);
+			appendColor(NOTE_COLOR);
+			appendString("NOTE : ");
 			break;
 		}
 		case Debug::Tag::test:
 		{
-			strings_.back().append(TEST_COLOR).append("TEST : ").append(DEFAULT_COLOR);
+			appendColor(TEST_COLOR);
+			appendString("TEST : ");
 			break;
 		}
 	}
 	return *this;
+}
+
+void Debug::DebugClass::appendColor(std::string c)
+{
+	strings_.back().append(c);
+}
+
+void Debug::DebugClass::appendString(std::string s)
+{
+	strings_.back().append(s);
+	fileWriter << s;
 }
