@@ -11,10 +11,12 @@ class TermContainer : public Term
 		bool validIndex(const unsigned int index) const;
 		virtual bool isContainer() const override;
 		virtual bool hasValue() const override;
-		virtual std::string getString() const override;
+		virtual std::string getString(Stringable* markedStringable = nullptr) const override;
 		unsigned int getChildSize() const;
 		bool addChild(Term* t);
 		virtual bool replace(Term* victim, Term* replacement);
+		virtual Term* getLefterChild(Term* t) const;
+		virtual Term* getRighterChild(Term* t) const;
 		bool isEmpty() const;
 		const std::string MISSING_ARGUMENT;
 		Term* getChild(const unsigned int index) const;

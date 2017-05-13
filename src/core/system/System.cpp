@@ -22,11 +22,6 @@ Value System::getValue() const
 	return getRoot()->getValue();
 }
 
-std::string System::getString() const
-{
-	return getRoot()->getString();
-}
-
 ValueType System::getValueType() const
 {
 	return getRoot()->getValueType();
@@ -35,20 +30,6 @@ ValueType System::getValueType() const
 bool System::isEmpty() const
 {
 	return getRoot()->isEmptyTerm();
-}
-
-Term* System::getTop() const
-{
-	return branch_[branch_.size()-1];
-}
-
-TermContainer* System::getLeafContainer()
-{
-	if (branch_.size() < 2)
-	{
-		return this;
-	}
-	return (TermContainer*)branch_[branch_.size()-2];
 }
 
 void System::addContainer(TermContainer* c)
@@ -78,13 +59,13 @@ bool System::addChild(Term* t)
 		addContainer((TermContainer*)t);
 		return true;
 	}
-	if (getTop()->isContainer())
+	if (getLeaf()->isContainer())
 	{
 		delete t;
 		return false;
 	}
 
-	Term* oldTop = getTop();
+	Term* oldTop = getLeaf();
 	TermContainer* c = getLeafContainer();
 	if (c->replace(oldTop, t))
 	{
@@ -97,6 +78,88 @@ bool System::addChild(Term* t)
 		delete t;
 		return false;
 	}
+}
+
+std::string System::getSystemString(bool withMarker) const
+{
+	if (withMarker)
+	{
+		return getRoot()->getString(getLeaf());
+	}
+	return getRoot()->getString();
+}
+
+void System::selectUp()
+{
+	if (branch_.size() > 1)
+		branch_.pop_back();
+}
+
+void System::selectDown()
+{
+	if (branch_.back()->isContainer())
+	{
+		TermContainer* t = dynamic_cast<TermContainer*>(branch_.back());
+		branch_.push_back(t->getChild(0));
+	}
+}
+
+void System::selectLeft()
+{
+	TermContainer* c = getLeafContainer();
+	Term* t = c->getLefterChild(getLeaf());
+	if (t != nullptr)
+	{
+		branch_.pop_back();
+		branch_.push_back(t);
+	}
+	else
+	{
+		Debug::out << Debug::warn << "System::selectLeft(): lefterChild returns nullptr" << Debug::endl;
+	}
+}
+
+void System::selectRight()
+{
+	TermContainer* c = getLeafContainer();
+	Term* t = c->getRighterChild(getLeaf());
+	if (t != nullptr)
+	{
+		branch_.pop_back();
+		branch_.push_back(t);
+	}
+	else
+	{
+		Debug::out << Debug::warn << "System::selectRight(): righterChild returns nullptr" << Debug::endl;
+	}
+}
+
+std::string System::getString(Stringable* markedStringable) const
+{
+	if (markedStringable != nullptr)
+	{
+		Debug::out << Debug::error << "System::getString(): markedString != nullptr" << Debug::endl;
+	}
+	return getRoot()->getString();
+}
+
+Term* System::getLeaf() const
+{
+	return branch_[branch_.size()-1];
+}
+
+TermContainer* System::getLeafContainer()
+{
+	if (branch_.size() < 2)
+	{
+		return this;
+	}
+	return (TermContainer*)branch_[branch_.size()-2];
+}
+
+Term* System::getRoot() const
+{
+	return getChild(0);
 }
 
 std::string System::getLinkSign() const
@@ -113,30 +176,6 @@ bool System::replace(Term* victim, Term* replacement)
 		return true;
 	}
 	return false;
-}
-
-void System::selectUp()
-{
-	if (!branch_.empty())
-		branch_.pop_back();
-}
-
-void System::selectDown()
-{
-	if (branch_.empty())
-	{
-		branch_.push_back(getRoot());
-	}
-	if (branch_.back()->isContainer())
-	{
-		TermContainer* t = dynamic_cast<TermContainer*>(branch_.back());
-		branch_.push_back(t->getChild(0));
-	}
-}
-
-Term* System::getRoot() const
-{
-	return getChild(0);
 }
 
 void System::setRoot(Term* t)

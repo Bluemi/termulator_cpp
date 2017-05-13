@@ -72,7 +72,7 @@ long int Number::getExponent() const
 	return exponent_;
 }
 
-std::string Number::getString() const
+std::string Number::getString(Stringable* markedStringable) const
 {
 	if (coefficient_ == 0)
 	{
@@ -101,6 +101,10 @@ std::string Number::getString() const
 		{
 			s.insert(s.length() + exponent_, ".");
 		}
+	}
+	if (markedStringable == this)
+	{
+		return "<" + s + ">";
 	}
 	return s;
 }

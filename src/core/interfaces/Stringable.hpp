@@ -8,7 +8,7 @@ class Stringable
 	public:
 		Stringable();
 		virtual ~Stringable();
-		virtual std::string getString() const = 0;
+		virtual std::string getString(Stringable* markedStringable = nullptr) const = 0;
 };
 
 #endif

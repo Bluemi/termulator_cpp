@@ -21,8 +21,12 @@ bool EmptyTerm::hasValue() const
 	return false;
 }
 
-std::string EmptyTerm::getString() const
+std::string EmptyTerm::getString(Stringable* markedStringable) const
 {
+	if (markedStringable == this)
+	{
+		return "<_>";
+	}
 	return "_";
 }
 

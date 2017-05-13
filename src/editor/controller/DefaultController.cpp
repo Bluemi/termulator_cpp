@@ -30,9 +30,22 @@ void DefaultController::applyKeyPress(const char c)
 			getTarget()->selectUp();
 			break;
 		}
+		case 'h':
+		case 'H':
+		{
+			getTarget()->selectLeft();
+			break;
+		}
+		case 'l':
+		case 'L':
+		{
+			getTarget()->selectRight();
+			break;
+		}
 		case '+':
 		{
 			getTarget()->addContainer(new Addition());
+			break;
 		}
 		case '0':
 		case '1':

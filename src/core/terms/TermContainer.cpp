@@ -45,16 +45,24 @@ bool TermContainer::hasValue() const
 	return true;
 }
 
-std::string TermContainer::getString() const
+std::string TermContainer::getString(Stringable* markedStringable) const
 {
 	std::string s = "(";
+	if (this == markedStringable)
+	{
+		s = "<" + s;
+	}
 	for (unsigned int i = 0; i < size_; i++)
 	{
-		s += getChild(i)->getString();
+		s += getChild(i)->getString(markedStringable);
 		if (i != (size_-1))
 		{
 			s += getLinkSign();
 		}
+	}
+	if (this == markedStringable)
+	{
+		return s + ")>";
 	}
 	return s+")";
 }
@@ -116,6 +124,40 @@ bool TermContainer::replace(Term* victim, Term* replacement)
 		}
 	}
 	return false;
+}
+
+Term* TermContainer::getLefterChild(Term* givenChild) const
+{
+	for (unsigned int i = 0; i < size_; i++)
+	{
+		Term* t = terms_[i];
+		if (t == givenChild)
+		{
+			if (i == 0) // Wenn givenChild das linkeste Child ist
+			{
+				return givenChild;
+			}
+			return terms_[i-1];
+		}
+	}
+	return nullptr;
+}
+
+Term* TermContainer::getRighterChild(Term* givenChild) const
+{
+	for (unsigned int i = 0; i < size_; i++)
+	{
+		Term* t = terms_[i];
+		if (t == givenChild)
+		{
+			if (i == (size_-1)) // Wenn givenChild das rechteste Child ist
+			{
+				return givenChild;
+			}
+			return terms_[i+1];
+		}
+	}
+	return nullptr;
 }
 
 bool TermContainer::isEmpty() const
