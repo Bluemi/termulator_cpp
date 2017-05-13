@@ -70,11 +70,9 @@ bool Console::hasMessage() const
 	return !messages_.empty();
 }
 
-void Console::render()
+void Console::subRender()
 {
-	Panel::render();
 	waddstr(getWindow(), text_.c_str());
-	Panel::refresh();
 }
 
 void Console::invokeCommand(Command* c)

@@ -6,10 +6,12 @@
 #include <core/misc/Debug.hpp>
 
 Editor::Editor()
-	: controller_(nullptr), running_(true), state_(CONSOLE), console_(LINES-1)
+	: controller_(nullptr), systemTextBox_(2, 2), running_(true), state_(CONSOLE), console_(LINES-1)
 {
 	controller_ = new DefaultController();
-	controller_->setTarget(&system_);
+	System* system = new System();
+	controller_->setTarget(system);
+	systemTextBox_.setSystem(system);
 	render();
 }
 
@@ -41,7 +43,7 @@ void Editor::applyQuitMessage(const QuitMessage& m)
 
 void Editor::renderSystems()
 {
-	mvaddstr(2,2, system_.getSystemString().c_str());
+	systemTextBox_.render();
 }
 
 void Editor::render()

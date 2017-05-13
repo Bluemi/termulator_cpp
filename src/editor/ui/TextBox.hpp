@@ -7,15 +7,11 @@
 class TextBox : public Panel
 {
 	public:
-		TextBox(Stringable* source, int y, int x, int height, int width, RenderMode mode = RenderMode::BORDER);
+		TextBox(int y, int x, int height, int width, RenderMode mode = RenderMode::BORDER);
 		virtual ~TextBox();
-		virtual void render() override;
+		virtual void subRender() override;
 	protected:
-		bool hasSource() const;
-		Stringable* getSource() const;
-		void setSource(Stringable* source);
-	private:
-		Stringable* source_;
+		void renderText(const std::string& text);
 };
 
 #endif

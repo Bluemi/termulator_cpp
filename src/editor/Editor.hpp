@@ -5,7 +5,7 @@
 
 #include <core/system/System.hpp>
 #include <editor/console/Console.hpp>
-
+#include <editor/ui/SystemTextBox.hpp>
 #include <editor/messages/MessageListener.hpp>
 
 class Controller;
@@ -30,7 +30,7 @@ class Editor : public MessageListener
 		void applyConsoleCommand();
 
 		Controller* controller_;
-		System system_;
+		SystemTextBox systemTextBox_;
 		bool running_;
 		InputState state_;
 		Console console_;

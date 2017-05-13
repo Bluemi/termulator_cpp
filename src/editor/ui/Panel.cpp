@@ -11,16 +11,6 @@ Panel::~Panel()
 	delwin(window_);
 }
 
-void Panel::refresh()
-{
-	wrefresh(window_);
-}
-
-WINDOW* Panel::getWindow() const
-{
-	return window_;
-}
-
 void Panel::render()
 {
 	wclear(window_);
@@ -29,9 +19,23 @@ void Panel::render()
 	{
 		box(window_, 0, 0);
 	}
+	subRender();
+	refresh();
 }
 
 void Panel::setRenderMode(RenderMode mode)
 {
 	mode_ = mode;
+}
+
+void Panel::subRender() {}
+
+void Panel::refresh()
+{
+	wrefresh(window_);
+}
+
+WINDOW* Panel::getWindow() const
+{
+	return window_;
 }

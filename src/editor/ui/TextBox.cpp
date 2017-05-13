@@ -1,30 +1,22 @@
 #include "TextBox.hpp"
 
-TextBox::TextBox(Stringable* source, int y, int x, int height, int width, RenderMode mode)
-	: Panel(y, x, height, width, mode), source_(source)
+#include <core/misc/Debug.hpp>
+
+TextBox::TextBox(int y, int x, int height, int width, RenderMode mode)
+	: Panel(y, x, height, width, mode)
 {}
 
 TextBox::~TextBox()
 {
 }
 
-void TextBox::render()
+void TextBox::subRender()
 {
-	Panel::render();
-	Panel::refresh();
+	Debug::out << Debug::error << "TextBox::render(): should never be called" << Debug::endl;
 }
 
-bool TextBox::hasSource() const
+void TextBox::renderText(const std::string& text)
 {
-	return (source_ != nullptr);
-}
-
-Stringable* TextBox::getSource() const
-{
-	return source_;
-}
-
-void TextBox::setSource(Stringable* source)
-{
-	source_ = source;
+	wmove(getWindow(), 1,1);
+	waddstr(getWindow(), text.c_str());
 }

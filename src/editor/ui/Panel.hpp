@@ -10,9 +10,10 @@ class Panel
 
 		Panel(const int y, const int x, const int height, const int width, RenderMode mode = RenderMode::BORDER);
 		virtual ~Panel();
-		virtual void render();
+		void render();
 		void setRenderMode(RenderMode mode);
 	protected:
+		virtual void subRender();
 		void refresh();
 		WINDOW* getWindow() const;
 	private:

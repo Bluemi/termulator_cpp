@@ -18,7 +18,7 @@ class Console : public Panel
 		Message* pollMessage();
 		bool hasMessage() const;
 
-		virtual void render() override;
+		virtual void subRender() override;
 
 		static const char BACKSPACE = 7;
 	private:
