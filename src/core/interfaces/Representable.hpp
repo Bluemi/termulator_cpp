@@ -8,7 +8,7 @@ class Representable
 	public:
 		Representable();
 		virtual ~Representable();
-		virtual Representation getRepresentation(Representable* markerRepresentable) const = 0;
+		virtual Representation getRepresentation(Representable* markerRepresentable = nullptr) const = 0;
 };
 
 #endif

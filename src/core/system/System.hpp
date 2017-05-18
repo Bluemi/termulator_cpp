@@ -25,7 +25,7 @@ class System : private TermContainer
 		void selectLeft();
 		void selectRight();
 
-		virtual Representation getRepresentation(Representable* markedRepresentable) const;
+		virtual Representation getRepresentation(Representable* markedRepresentable = nullptr) const;
 	private:
 		Term* getLeaf() const;
 		TermContainer* getLeafContainer();
