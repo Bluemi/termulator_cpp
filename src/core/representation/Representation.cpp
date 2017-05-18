@@ -32,11 +32,6 @@ void Representation::add(const std::string& s)
 	parts_.push_back(RepresentationPart(s));
 }
 
-void Representation::add(const RepresentationPart& part)
-{
-	parts_.push_back(part);
-}
-
 void Representation::add(const Representation& rep)
 {
 	for (RepresentationPart p : rep.parts_)
@@ -53,4 +48,9 @@ void Representation::addMarkerBegin()
 void Representation::addMarkerEnd()
 {
 	add(RepresentationPart(RepresentationType::MARKEREND_REPRESENTATION));
+}
+
+void Representation::add(const RepresentationPart& part)
+{
+	parts_.push_back(part);
 }

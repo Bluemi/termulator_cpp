@@ -27,12 +27,12 @@ Representation EmptyTerm::getRepresentation(Representable* markedRepresentable) 
 	if (this == markedRepresentable)
 	{
 		rep.addMarkerBegin();
-		rep.add(RepresentationPart("_"));
+		rep.add("_");
 		rep.addMarkerEnd();
 	}
 	else
 	{
-		rep.add(RepresentationPart("_"));
+		rep.add("_");
 	}
 	return rep;
 }

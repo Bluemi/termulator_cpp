@@ -14,11 +14,11 @@ class Representation
 
 		std::string getString() const;
 		void add(const std::string& s);
-		void add(const RepresentationPart& part);
 		void add(const Representation& rep);
 		void addMarkerBegin();
 		void addMarkerEnd();
 	private:
+		void add(const RepresentationPart& part);
 		std::vector<RepresentationPart> parts_;
 };
 
