@@ -16,6 +16,8 @@ class Operation : public TermContainer
 		virtual ValueType getValueType() const override;
 		// returns true, if all Childs exist, have Value and this Value has to be of Type DOUBLE
 		virtual bool hasValue() const override;
+		virtual Representation getRepresentation(Representable* markedRepresentable) const override;
+		virtual std::string getLinkSign() const = 0;
 };
 
 #endif

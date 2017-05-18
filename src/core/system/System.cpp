@@ -158,11 +158,6 @@ Term* System::getRoot() const
 	return getChild(0);
 }
 
-std::string System::getLinkSign() const
-{
-	return "";
-}
-
 bool System::replace(Term* victim, Term* replacement)
 {
 	if (getRoot() == victim)

@@ -11,8 +11,7 @@ class TermContainer : public Term
 		bool validIndex(const unsigned int index) const;
 		virtual bool isContainer() const override;
 		virtual bool hasValue() const override;
-		virtual Representation getRepresentation(Representable* markedRepresentable) const override;
-		unsigned int getChildSize() const;
+		unsigned int getSize() const;
 		bool addChild(Term* t);
 		virtual bool replace(Term* victim, Term* replacement);
 		virtual Term* getLefterChild(Term* t) const;
@@ -22,7 +21,6 @@ class TermContainer : public Term
 		Term* getChild(const unsigned int index) const;
 	protected:
 		Term* setChild(const unsigned int index, Term* t); // returns the term hold before at <index>
-		virtual std::string getLinkSign() const = 0;
 		bool isSlotEmpty(const unsigned int i) const;
 		unsigned int getFirstEmptySlot() const;
 	private:

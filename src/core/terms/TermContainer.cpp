@@ -45,31 +45,7 @@ bool TermContainer::hasValue() const
 	return true;
 }
 
-Representation TermContainer::getRepresentation(Representable* markedRepresentable) const
-{
-	Representation rep;
-	if (this == markedRepresentable)
-	{
-		rep.addMarkerBegin();
-	}
-	rep.add("(");
-	for (unsigned int i = 0; i < size_; i++)
-	{
-		rep.add(getChild(i)->getRepresentation(markedRepresentable));
-		if (i != (size_-1))
-		{
-			rep.add(getLinkSign());
-		}
-	}
-	rep.add(")");
-	if (this == markedRepresentable)
-	{
-		rep.addMarkerEnd();
-	}
-	return rep;
-}
-
-unsigned int TermContainer::getChildSize() const
+unsigned int TermContainer::getSize() const
 {
 	return size_;
 }

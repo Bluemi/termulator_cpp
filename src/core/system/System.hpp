@@ -30,7 +30,6 @@ class System : private TermContainer
 		Term* getLeaf() const;
 		TermContainer* getLeafContainer();
 		Term* getRoot() const;
-		virtual std::string getLinkSign() const override;
 		virtual bool replace(Term* victim, Term* replacement) override;
 		void setRoot(Term* t);
 		std::vector<Term*> branch_;
