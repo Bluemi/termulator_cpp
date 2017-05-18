@@ -20,6 +20,15 @@ std::string Representation::getString() const
 
 void Representation::add(const std::string& s)
 {
+	if (!parts_.empty())
+	{
+		RepresentationPart* lastPart = &(parts_.back());
+		if (lastPart->getType() == RepresentationType::STRING_REPRESENTATION)
+		{
+			lastPart->addString(s);
+			return;
+		}
+	}
 	parts_.push_back(RepresentationPart(s));
 }
 
