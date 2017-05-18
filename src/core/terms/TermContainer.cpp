@@ -45,26 +45,28 @@ bool TermContainer::hasValue() const
 	return true;
 }
 
-std::string TermContainer::getString(Stringable* markedStringable) const
+Representation TermContainer::getRepresentation(Representable* markedRepresentable) const
 {
-	std::string s = "(";
-	if (this == markedStringable)
+	Representation rep;
+	if (this == markedRepresentable)
 	{
-		s = "<" + s;
+		rep.addMarkerBegin();
 	}
+	rep.add("(");
 	for (unsigned int i = 0; i < size_; i++)
 	{
-		s += getChild(i)->getString(markedStringable);
+		rep.add(getChild(i)->getRepresentation(markedRepresentable));
 		if (i != (size_-1))
 		{
-			s += getLinkSign();
+			rep.add(getLinkSign());
 		}
 	}
-	if (this == markedStringable)
+	rep.add(")");
+	if (this == markedRepresentable)
 	{
-		return s + ")>";
+		rep.addMarkerEnd();
 	}
-	return s+")";
+	return rep;
 }
 
 unsigned int TermContainer::getChildSize() const

@@ -18,7 +18,7 @@ void testNumberSetValue()
 	}
 	*/
 	v.setValue(10.2);
-	std::cout << "testNumberSetValue(): 10.2 = " << v.getString() << std::endl;
+	std::cout << "testNumberSetValue(): 10.2 = " << v.getRepresentation(nullptr).getString() << std::endl;
 }
 
 void testNumberPlus()
@@ -86,7 +86,7 @@ void testNumberParse()
 	for (unsigned int i = 0; i < str.size(); i++)
 	{
 		v.parse(str[i]);
-		std::cout << str[i] << " = " << v.getString() << "\t exponent = " << v.getExponent() << "\t coefficient = " << v.getCoefficient() << std::endl;
+		std::cout << str[i] << " = " << v.getRepresentation(nullptr).getString() << "\t exponent = " << v.getExponent() << "\t coefficient = " << v.getCoefficient() << std::endl;
 	}
 }
 

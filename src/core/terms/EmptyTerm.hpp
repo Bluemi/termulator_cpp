@@ -11,7 +11,7 @@ class EmptyTerm : public Term
 		virtual Value getValue() const override;
 		virtual ValueType getValueType() const override;
 		virtual bool hasValue() const override;
-		virtual std::string getString(Stringable* markedStringable = nullptr) const override;
+		virtual Representation getRepresentation(Representable* markedRepresentable) const override;
 		virtual bool isEmptyTerm() const override;
 };
 

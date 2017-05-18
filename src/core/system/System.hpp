@@ -17,15 +17,16 @@ class System : private TermContainer
 		bool isEmpty() const;
 		void addContainer(TermContainer* c);
 		bool addChild(Term* t);
-		std::string getSystemString(bool withMarker = true) const;
+		bool containerSelected() const;
 
-		// move control
+		// selection control
 		void selectUp();
 		void selectDown();
 		void selectLeft();
 		void selectRight();
+
+		virtual Representation getRepresentation(Representable* markedRepresentable) const;
 	private:
-		virtual std::string getString(Stringable* markedStringable = nullptr) const override;
 		Term* getLeaf() const;
 		TermContainer* getLeafContainer();
 		Term* getRoot() const;

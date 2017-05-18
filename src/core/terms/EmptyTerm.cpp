@@ -21,13 +21,20 @@ bool EmptyTerm::hasValue() const
 	return false;
 }
 
-std::string EmptyTerm::getString(Stringable* markedStringable) const
+Representation EmptyTerm::getRepresentation(Representable* markedRepresentable) const
 {
-	if (markedStringable == this)
+	Representation rep;
+	if (this == markedRepresentable)
 	{
-		return "<_>";
+		rep.addMarkerBegin();
+		rep.add(RepresentationPart("_"));
+		rep.addMarkerEnd();
 	}
-	return "_";
+	else
+	{
+		rep.add(RepresentationPart("_"));
+	}
+	return rep;
 }
 
 bool EmptyTerm::isEmptyTerm() const

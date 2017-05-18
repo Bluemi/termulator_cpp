@@ -72,11 +72,11 @@ long int Number::getExponent() const
 	return exponent_;
 }
 
-std::string Number::getString(Stringable* markedStringable) const
+Representation Number::getRepresentation(Representable* markedRepresentable) const
 {
 	if (coefficient_ == 0)
 	{
-		return "0";
+		return Representation("0");
 	}
 	std::string s = std::to_string(coefficient_);
 	if (exponent_ > 0)
@@ -102,11 +102,11 @@ std::string Number::getString(Stringable* markedStringable) const
 			s.insert(s.length() + exponent_, ".");
 		}
 	}
-	if (markedStringable == this)
+	if (markedRepresentable == this)
 	{
 		return "<" + s + ">";
 	}
-	return s;
+	return Representation(s);
 }
 
 int toDigit(const char c)

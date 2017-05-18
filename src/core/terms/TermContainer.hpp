@@ -11,7 +11,7 @@ class TermContainer : public Term
 		bool validIndex(const unsigned int index) const;
 		virtual bool isContainer() const override;
 		virtual bool hasValue() const override;
-		virtual std::string getString(Stringable* markedStringable = nullptr) const override;
+		virtual Representation getRepresentation(Representable* markedRepresentable) const override;
 		unsigned int getChildSize() const;
 		bool addChild(Term* t);
 		virtual bool replace(Term* victim, Term* replacement);

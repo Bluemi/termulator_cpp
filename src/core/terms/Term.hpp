@@ -4,9 +4,9 @@
 #include <string>
 
 #include <core/values/Value.hpp>
-#include <core/interfaces/Stringable.hpp>
+#include <core/interfaces/Representable.hpp>
 
-class Term : public Stringable
+class Term : public Representable
 {
 	public:
 		Term();

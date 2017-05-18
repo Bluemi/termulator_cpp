@@ -1,8 +1,9 @@
 #ifndef __TEXTBOX_CLASS__
 #define __TEXTBOX_CLASS__
 
+#include <string>
+
 #include "Panel.hpp"
-#include <core/interfaces/Stringable.hpp>
 
 class TextBox : public Panel
 {

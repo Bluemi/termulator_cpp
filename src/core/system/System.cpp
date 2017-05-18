@@ -80,13 +80,9 @@ bool System::addChild(Term* t)
 	}
 }
 
-std::string System::getSystemString(bool withMarker) const
+bool System::containerSelected() const
 {
-	if (withMarker)
-	{
-		return getRoot()->getString(getLeaf());
-	}
-	return getRoot()->getString();
+	return !getLeaf()->isContainer();
 }
 
 void System::selectUp()
@@ -134,13 +130,13 @@ void System::selectRight()
 	}
 }
 
-std::string System::getString(Stringable* markedStringable) const
+Representation System::getRepresentation(Representable* markedRepresentable) const
 {
-	if (markedStringable != nullptr)
+	if (markedRepresentable != nullptr)
 	{
-		Debug::out << Debug::error << "System::getString(): markedString != nullptr" << Debug::endl;
+		Debug::out << Debug::warn << "System::getRepresentation(): markedRepresentable != nullptr" << Debug::endl;
 	}
-	return getRoot()->getString();
+	return getRoot()->getRepresentation(getLeaf());
 }
 
 Term* System::getLeaf() const

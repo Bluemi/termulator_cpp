@@ -19,7 +19,7 @@ void SystemTextBox::subRender()
 		Debug::out << Debug::error << "SystemTextBox::subRender(): system_ == nullptr" << Debug::endl;
 		return;
 	}
-	TextBox::renderText(system_->getSystemString(showMarker_));
+	TextBox::renderText(system_->getRepresentation(nullptr).getString());
 }
 
 void SystemTextBox::setSystem(System* s)

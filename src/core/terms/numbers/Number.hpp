@@ -30,7 +30,7 @@ class Number : public Term
 		long int getCoefficient() const;
 		long int getExponent() const;
 
-		std::string getString(Stringable* markedStringable = nullptr) const override;
+		virtual Representation getRepresentation(Representable* markedRepresentable) const override;
 
 		// parse
 		bool parse(const std::string& s);
