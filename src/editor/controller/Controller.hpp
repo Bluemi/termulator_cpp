@@ -1,20 +1,20 @@
 #ifndef __CONTROLLER_CLASS__
 #define __CONTROLLER_CLASS__
 
-class System;
+class SystemTextBox;
 
 class Controller
 {
 	public:
 		Controller();
 		virtual ~Controller();
-		void setTarget(System* target);
+		void setTarget(SystemTextBox* target);
 		virtual void applyKeyPress(const char c) = 0;
 		bool hasTarget() const;
 	protected:
-		System* getTarget() const;
+		SystemTextBox* getTarget() const;
 	private:
-		System* target_;
+		SystemTextBox* target_;
 
 };
 

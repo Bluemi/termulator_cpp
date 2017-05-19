@@ -17,6 +17,10 @@ class Representation
 		void add(const Representation& rep);
 		void addMarkerBegin();
 		void addMarkerEnd();
+
+		bool validIndex(const int i) const;
+		RepresentationPart getPart(const int i) const;
+		int getSize() const;
 	private:
 		void add(const RepresentationPart& part);
 		std::vector<RepresentationPart> parts_;

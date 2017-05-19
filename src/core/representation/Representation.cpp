@@ -1,5 +1,7 @@
 #include "Representation.hpp"
 
+#include <core/misc/Debug.hpp>
+
 Representation::Representation()
 {}
 
@@ -53,4 +55,24 @@ void Representation::addMarkerEnd()
 void Representation::add(const RepresentationPart& part)
 {
 	parts_.push_back(part);
+}
+
+bool Representation::validIndex(const int i) const
+{
+	return (i >= 0) && (i < (int)parts_.size());
+}
+
+RepresentationPart Representation::getPart(const int i) const
+{
+	if (!validIndex(i))
+	{
+		Debug::out << Debug::warn << "Representation::getPart(): invalid index=" << i << " size=" << (int)parts_.size() << Debug::endl;
+		return RepresentationPart(RepresentationType::STRING_REPRESENTATION);
+	}
+	return parts_[i];
+}
+
+int Representation::getSize() const
+{
+	return parts_.size();
 }

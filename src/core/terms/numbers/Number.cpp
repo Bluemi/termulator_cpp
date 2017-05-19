@@ -76,8 +76,24 @@ Representation Number::getRepresentation(Representable* markedRepresentable) con
 {
 	if (coefficient_ == 0)
 	{
-		return Representation("0");
+		Representation r;
+		if (markedRepresentable == this)
+		{
+			r.addMarkerBegin();
+			r.add("0");
+			r.addMarkerEnd();
+			return r;
+		}
+		r.add("0");
+		return r;
 	}
+
+	Representation r;
+	if (markedRepresentable == this)
+	{
+		r.addMarkerBegin();
+	}
+
 	std::string s = std::to_string(coefficient_);
 	if (exponent_ > 0)
 	{
@@ -102,11 +118,12 @@ Representation Number::getRepresentation(Representable* markedRepresentable) con
 			s.insert(s.length() + exponent_, ".");
 		}
 	}
+	r.add(s);
 	if (markedRepresentable == this)
 	{
-		return "<" + s + ">";
+		r.addMarkerEnd();
 	}
-	return Representation(s);
+	return r;
 }
 
 int toDigit(const char c)

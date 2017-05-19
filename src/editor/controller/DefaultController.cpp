@@ -3,6 +3,7 @@
 #include <core/system/System.hpp>
 #include <core/terms/operations/Addition.hpp>
 #include <core/misc/Debug.hpp>
+#include <editor/ui/SystemTextBox.hpp>
 
 DefaultController::DefaultController()
 {}
@@ -15,36 +16,43 @@ void DefaultController::applyKeyPress(const char c)
 	if (!hasTarget())
 	{
 		Debug::out << Debug::warn << "DefaultController::applyKeyPress(): has no target" << Debug::endl;
+		return;
+	}
+	if (getTarget()->getSystem() == nullptr)
+	{
+		Debug::out << Debug::warn << "DefaultController::applyKeyPress(): target has no system" << Debug::endl;
+		return;
 	}
 	switch (c)
 	{
 		case 'j':
-		case 'J':
 		{
-			getTarget()->selectDown();
+			getTarget()->finishInsertion();
+			getTarget()->getSystem()->selectDown();
 			break;
 		}
 		case 'k':
-		case 'K':
 		{
-			getTarget()->selectUp();
+			getTarget()->finishInsertion();
+			getTarget()->getSystem()->selectUp();
 			break;
 		}
 		case 'h':
-		case 'H':
 		{
-			getTarget()->selectLeft();
+			getTarget()->finishInsertion();
+			getTarget()->getSystem()->selectLeft();
 			break;
 		}
 		case 'l':
-		case 'L':
 		{
-			getTarget()->selectRight();
+			getTarget()->finishInsertion();
+			getTarget()->getSystem()->selectRight();
 			break;
 		}
 		case '+':
 		{
-			getTarget()->addContainer(new Addition());
+			getTarget()->finishInsertion();
+			getTarget()->getSystem()->addContainer(new Addition());
 			break;
 		}
 		case '0':
@@ -57,7 +65,10 @@ void DefaultController::applyKeyPress(const char c)
 		case '7':
 		case '8':
 		case '9':
+		case '.':
+		case ',':
 		{
+			getTarget()->insertChar(c);
 			break;
 		}
 	}

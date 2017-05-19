@@ -10,8 +10,8 @@ Editor::Editor()
 {
 	controller_ = new DefaultController();
 	System* system = new System();
-	controller_->setTarget(system);
 	systemTextBox_.setSystem(system);
+	controller_->setTarget(&systemTextBox_);
 	render();
 }
 

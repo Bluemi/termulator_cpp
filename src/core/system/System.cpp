@@ -85,6 +85,11 @@ bool System::containerSelected() const
 	return !getLeaf()->isContainer();
 }
 
+bool System::canInsertChild() const
+{
+	return getLeaf()->isEmptyTerm();
+}
+
 void System::selectUp()
 {
 	if (branch_.size() > 1)

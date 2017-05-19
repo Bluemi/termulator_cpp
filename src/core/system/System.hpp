@@ -18,6 +18,7 @@ class System : private TermContainer
 		void addContainer(TermContainer* c);
 		bool addChild(Term* t);
 		bool containerSelected() const;
+		bool canInsertChild() const;
 
 		// selection control
 		void selectUp();
