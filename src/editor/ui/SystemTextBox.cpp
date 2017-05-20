@@ -101,7 +101,7 @@ void SystemTextBox::finishInsertion()
 		Number* n = new Number();
 		if (!n->parse(inputString_))
 		{
-			Debug::out << Debug::warn << "SystemTextBox::finishInsertion(): inputString_ = \"" + inputString_ + "\"" << Debug::endl;
+			Debug::out << Debug::warn << "SystemTextBox::finishInsertion(): can not parse inputString_ = \"" + inputString_ + "\"" << Debug::endl;
 		}
 		if (!system_->addChild(n))
 		{

@@ -35,9 +35,7 @@ void Number::setValue(const double number)
 		exponent_ = 0;
 		return;
 	}
-	// coefficient = 2.2 * 10^5 = 220000
 	long int coefficient = (int)(number * pow(10.0, precision_));
-	// exponent = -5
 	long int exponent = -precision_;
 	int i = 0;
 	while (coefficient % 10 == 0)
@@ -164,6 +162,7 @@ bool Number::parse(const std::string& s)
 	int c(0);
 	int e(0);
 	bool delimiterFound = false;
+	bool negative = false;
 	for (unsigned int i = 0; i < s.length(); i++)
 	{
 		if (delimiterFound)
@@ -173,7 +172,18 @@ bool Number::parse(const std::string& s)
 		const int digit = toDigit(s[i]);
 		if (digit == -1)
 		{
-			if (isDelimiter(s[i]))
+			if (s[i] == '-')
+			{
+				if (i == 0)
+				{
+					negative = true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else if (isDelimiter(s[i]))
 			{
 				if (delimiterFound)
 				{
@@ -196,7 +206,14 @@ bool Number::parse(const std::string& s)
 		}
 	}
 	exponent_ = -e;
-	coefficient_ = c;
+	if (negative)
+	{
+		coefficient_ = -c;
+	}
+	else
+	{
+		coefficient_ = c;
+	}
 	return true;
 }
 

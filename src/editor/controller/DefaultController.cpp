@@ -67,6 +67,7 @@ void DefaultController::applyKeyPress(const char c)
 		case '9':
 		case '.':
 		case ',':
+		case '-':
 		{
 			getTarget()->insertChar(c);
 			break;
