@@ -59,16 +59,17 @@ bool System::addChild(Term* t)
 		addContainer((TermContainer*)t);
 		return true;
 	}
-	if (getLeaf()->isContainer())
+	Term* oldTop = getLeaf();
+	if (oldTop->isContainer())
 	{
-		delete t;
 		return false;
 	}
 
-	Term* oldTop = getLeaf();
 	TermContainer* c = getLeafContainer();
 	if (c->replace(oldTop, t))
 	{
+		branch_.pop_back();
+		branch_.push_back(t);
 		delete oldTop;
 		return true;
 	}
@@ -87,7 +88,7 @@ bool System::containerSelected() const
 
 bool System::canInsertChild() const
 {
-	return getLeaf()->isEmptyTerm();
+	return (getLeaf()->isEmptyTerm() || !getLeaf()->isContainer());
 }
 
 void System::selectUp()

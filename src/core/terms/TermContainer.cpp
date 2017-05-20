@@ -135,6 +135,7 @@ Term* TermContainer::getRighterChild(Term* givenChild) const
 			return terms_[i+1];
 		}
 	}
+	Debug::out << Debug::warn << "TermContainer::getRighterChild(): givenChild not found" << Debug::endl;
 	return nullptr;
 }
 
