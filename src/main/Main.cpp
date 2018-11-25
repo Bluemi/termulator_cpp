@@ -12,6 +12,9 @@
 void run();
 void init_curses();
 
+void run();
+void init_curses();
+
 int main()
 {
 	if (!TEST)
