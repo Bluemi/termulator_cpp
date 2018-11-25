@@ -43,7 +43,7 @@ function GenerateGenerelSettings(settings)
 end
 
 function GenerateClientSettings(settings)
-	GenerateLibSettings(settings, "sfml")
+    -- GenerateLibSettings(settings, "sfml")
 	GenerateLibSettings(settings, "curses")
 end
 
