@@ -2,16 +2,22 @@
 
 #include <ncurses.h>
 
-#include <test/Test.hpp>
 #include <core/terms/numbers/Number.hpp>
 #include <core/terms/operations/Addition.hpp>
 #include <core/misc/Debug.hpp>
+#include <core/system/System.hpp>
+#include <editor/Editor.hpp>
+#include <test/Test.hpp>
+
+void run();
+void init_curses();
 
 int main()
 {
 	if (!TEST)
 	{
-		Main m;
+		init_curses();
+		run();
 	}
 	else
 	{
@@ -20,28 +26,18 @@ int main()
 	return 0;
 }
 
-Main::Main()
-	: editor_(nullptr)
+void init_curses()
 {
-	run();
-}
-
-Main::~Main()
-{
-	if (editor_ != nullptr)
-		delete editor_;
-}
-
-void Main::run()
-{
-	// initiate ncurses
 	initscr();
 	raw();
 	noecho();
 	keypad(stdscr, true);
 	curs_set(0);
 	clear();
-	//ESCDELAY = 10;
-	editor_ = new Editor();
-	editor_->run();
+}
+
+void run()
+{
+	Editor editor;
+	editor.run();
 }
