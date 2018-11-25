@@ -10,10 +10,10 @@ class Main
 {
 	public:
 		Main();
-		~Main();
 	private:
+		static void init_curses();
 		void run();
-		Editor *editor_;
+		Editor editor_;
 };
 
 #endif
